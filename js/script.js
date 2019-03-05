@@ -9,5 +9,5 @@ function loadPage(page) {
 }
 
 $(document).ready(function() {
-    load("api/menu.php","#menu");
+    load("api/services/startService.php","body");
 });

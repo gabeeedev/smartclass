@@ -1,3 +1,31 @@
 body {
-    background-image: linear-gradient(to left bottom, #00d3ff, #52dcfe, #77e5fd, #95edfe, #b0f5ff);
+    background-color:#EEE;
+}
+
+.login-form {
+    background-color:#FFF;
+    box-shadow: 0px 4px 16px 0px #AAA;
+}
+
+.login-logo {
+    font-size:36px;
+    font-weight: bold;
+    background-color:#0089ff;
+    color:white;
+}
+
+.btn-login {
+    background-color:#222;
+    color:#DDD;
+    box-shadow: 0px 2px 8px 0px #555;
+}
+.btn-login:hover {
+    color:#FFF;
+    text-shadow: 0px 0px 4px #DDD;
+}
+
+.form-simple {
+    border: 0px;
+    border-bottom: solid 2px #AAA;
+    border-radius: 0px;
 }

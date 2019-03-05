@@ -1,0 +1,64 @@
+#content {
+    margin-right:256px;
+    padding:64px;
+}
+
+#menu {
+    width: 256px;
+    position: absolute;
+    right:0px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.menu-item {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    font-size: 20px;
+    /* background-color:#CCC; */
+    /* vertical-align: middle; */
+}
+.menu-item:hover {
+    cursor: pointer;
+    color:white;
+    background: rgba(0, 0, 0, 0.5)
+}
+
+.login-form {
+    width:40ch;
+    /* margin-top:-200px; */
+    padding:64px 32px;
+    border-radius: 8px;
+}
+
+.login-logo {
+    margin:16px auto 64px auto;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+}
+
+.btn-login {
+    display: block;
+    width: 100%;
+}
+
+.form-simple {
+    margin-bottom:48px;
+}
+
+.flex-center {
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+input:focus {
+    box-shadow: none !important;
+}
