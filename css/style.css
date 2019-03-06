@@ -62,3 +62,9 @@
 input:focus {
     box-shadow: none !important;
 }
+
+.center-link {
+    display:block;
+    text-align: center;
+    margin: 8px 0px;
+}

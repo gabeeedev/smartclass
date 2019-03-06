@@ -17,3 +17,16 @@ function isLoggedIn() {
         return false;
     }
 }
+
+function loginRedirect() {
+    if (!isLoggedIn()) {
+        include("../pages/login.html");
+        exit();
+    }
+}
+
+function loginDie() {
+    if (!isLoggedIn()) {
+        exit();
+    }
+}
