@@ -34,7 +34,7 @@ loginRedirect();
             $data = sql_select("SELECT * FROM teaches JOIN courses ON course=courseid");
             foreach ($data as $k => $v) {
                 ?>
-                    <div class="course-box course-active" <?="redirect='course' target='#content' data='course:" . $v["course"] . "'"?>>
+                    <div class="course-box course-active" <?="redirect='course' target='#content' options='course:" . $v["course"] . "'"?>>
                         <h2><?=$v["title"]?></h2>
                         <span><?=$v["token"]?></span>
                     </div>

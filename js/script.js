@@ -4,10 +4,10 @@ function handler(events, target, func) {
     $(document).on(events,target,func);
 }
 
-function load(page, tar) {
+function load(page, tar, options={}) {
     console.log("Load: " + page + " to " + tar);
     $(tar).fadeOut(200, function() {
-        $.get(page,function(data) {
+        $.get(page,options,function(data) {
             $(tar).html(data);
             // refreshCallbacks();
             $(tar).fadeIn(200);
@@ -15,22 +15,30 @@ function load(page, tar) {
     });
 }
 
-function loadPage(page) {
-    load(page,"#content");
+function loadPage(page,options={}) {
+    load(page,"#content",options);
 }
 
-function loadController(controller,tar) {
-    load("api/controllers/" + controller + ".php",tar);
+function loadController(controller,tar,options={}) {
+    load("api/controllers/" + controller + ".php",tar,options);
 }
 
 function redirect(e) {
     e.preventDefault();
-    target = "#page";
-    service = $(this).attr("redirect");
+    var target = "#page";
+    var controller = $(this).attr("redirect");
+    var options = {};
     if($(this).attr("target")) {
         target = $(this).attr("target");
     }
-    loadController(service, target);
+    if($(this).attr("options")) {
+        var t = $(this).attr("options").split(",");
+        t.forEach(v => {
+            var opt = v.split(":");
+            options[opt[0]] = opt[1];
+        });        
+    }
+    loadController(controller, target, options);
 }
 handler("click","[redirect]",redirect);
 
