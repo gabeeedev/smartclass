@@ -6,6 +6,8 @@ require_once "../util/util.php";
 
 loginDie();
 
+$data = [];
+
 if(isset($_POST["courseName"]) && strlen($_POST["courseName"]) >= 3) {
     $token = generateToken(7);
     
@@ -22,9 +24,11 @@ if(isset($_POST["courseName"]) && strlen($_POST["courseName"]) >= 3) {
         "course" => $cid
     ]);
 
-    setCurrentClass($cid);
+    //setCurrentClass($cid);
     
-    echo "1";
+    $data["id"] = $cid;
 } else {
-    echo "The name of the course is too short.";
+    $data["error"] = "The name of the course is too short.";
 }
+
+echo json_encode($data);

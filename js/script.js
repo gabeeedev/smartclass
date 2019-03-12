@@ -4,11 +4,15 @@ function handler(events, target, func) {
     $(document).on(events,target,func);
 }
 
-function load(page, tar, options={}) {
+function load(page, tar, options={},save=true) {
     console.log("Load: " + page + " to " + tar);
     $(tar).fadeOut(200, function() {
         $.get(page,options,function(data) {
             $(tar).html(data);
+            
+            if(save) {
+                history.pushState({"page":page,"options":options,"target":tar},null,null);
+            }
             // refreshCallbacks();
             $(tar).fadeIn(200);
         });
@@ -116,15 +120,24 @@ function createCourse(e) {
         courseName:$("#courseName").val()
     },
     function(data) {
-        if (data=="1") {
-            loadController("course","#content");
+        data = JSON.parse(data);
+        if ("id" in data) {
+            loadController("course","#content",{"course":data["id"]});
         } else {
-            $("#courseNameError").html(data);
+            $("#courseNameError").html(data["error"]);
         }
     });
 }
 handler("submit","#createCourse",createCourse);
 
 $(document).ready(function() {
+    window.onpopstate = stateHandler;
     loadController("index","#page");
 });
+
+function stateHandler(data) {
+    if (data.state != null) {
+        state = data.state;
+        load(state.page,state.target,state.options,false);
+    }
+}
