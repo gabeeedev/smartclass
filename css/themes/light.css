@@ -2,6 +2,21 @@ body {
     background-color:#EEE;
 }
 
+.side-bar {
+    background-color:#222;
+    color:#EEE;
+}
+
+.side-bar-item {
+    transition: 0.5s;
+}
+
+.side-bar-item:hover {
+    background-color:#333;
+    color:#FFF;
+    text-shadow: 0px 0px 8px white;
+}
+
 .login-form {
     background-color:#FFF;
     box-shadow: 0px 4px 16px 0px #AAA;
@@ -28,4 +43,43 @@ body {
     border: 0px;
     border-bottom: solid 2px #AAA;
     border-radius: 0px;
+}
+
+.language {
+    background-color: #222;
+}
+
+.column:nth-child(2n-1) {
+    border-right: 1px solid #CCC;
+}
+.column:nth-child(2n) {
+    border-left: 1px solid #CCC;
+}
+
+.course-active {
+    background-color: #80ddff;
+    transition:0.5s;
+    box-shadow: 0px 4px 16px 0px #AAA;
+    border: 1px solid #75b5ff;
+}
+.course-active:hover {
+    background-color: #a8e8ff
+}
+
+.course-closed {
+    background-color: linear-gradient(to left bottom, #ffd380, #ffd99a, #ffdfb4, #ffe7cd, #f9efe6);
+}
+
+.course-archived {
+    background-color: linear-gradient(to left bottom, #9d9d9d, #adadad, #bdbdbd, #cdcdcd, #dedede);
+}
+
+.class-box {    
+    color:#222;
+    transition:0.5s;
+    box-shadow: 0px 2px 4px 1px #999;
+}
+
+.page-error {
+    color:#AAA;
 }

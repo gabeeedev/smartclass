@@ -2,4 +2,4 @@
 
 require_once "../util/auth.php";
 
-loginRedirect();
+unset($_SESSION['user']);

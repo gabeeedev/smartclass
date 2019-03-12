@@ -1,34 +1,78 @@
-#content {
-    margin-right:256px;
-    padding:64px;
-}
-
-#menu {
-    width: 256px;
-    position: absolute;
-    right:0px;
+body, html {
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
 }
 
-.menu-item {
-    width: 100%;
-    text-align: center;
-    padding: 8px;
-    font-size: 20px;
-    /* background-color:#CCC; */
-    /* vertical-align: middle; */
+#page {
+    width:100%;
+    height: 100%;
 }
-.menu-item:hover {
+
+.side-bar {
+    /* padding:16px; */
+    width: 224px;
+    height: 100vh;
+    line-height: 1.0;
+    position: fixed;
+    display:flex;
+    flex-direction: column;
+}
+
+.side-bar-item {
+    display:flex;
+    /* margin-bottom: 8px; */
+    padding:8px 16px;
     cursor: pointer;
-    color:white;
-    background: rgba(0, 0, 0, 0.5)
+}
+
+.side-bar-icon .material-icons{
+    font-size: 32px;
+}
+
+.side-bar-text {
+    flex-grow: 1;
+    line-height: 32px;
+    height: 32px;
+    vertical-align: middle;
+    padding-left:16px;
+    font-size:18px;
+    overflow: hidden;
+}
+
+.exit-control {
+    margin-top:auto;
+}
+
+.content {
+    margin-left:224px;
+    padding:16px;
+    display:flex;
+    flex-direction: row;
+}
+
+.column {
+    flex: 1;
+    padding:16px;
+}
+
+.course-list {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.course-box {
+    width: 256px;
+    height: 160px;
+    margin:12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding:16px;
+    cursor: pointer;
 }
 
 .login-form {
     width:40ch;
     /* margin-top:-200px; */
-    padding:64px 32px;
+    padding:32px 32px;
     border-radius: 8px;
 }
 
@@ -67,4 +111,34 @@ input:focus {
     display:block;
     text-align: center;
     margin: 8px 0px;
+}
+
+.language {
+    position: absolute;
+    right:16px;
+    top:16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    line-height: 48px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.language > img {
+    width: 24px;
+    height: 18px;
+    box-shadow: 0px 4px 4px 4px #111;
+    /* border: 1px solid #DDD; */
+}
+
+/* .error {
+    width:100%;
+    padding: 8px;
+} */
+
+.page-error {
+    font-size:64px;
+    align-self:center;
+    justify-self: center;
 }
