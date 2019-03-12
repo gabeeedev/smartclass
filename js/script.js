@@ -113,7 +113,6 @@ function toggleMenu() {
 handler("click",".menu-control",toggleMenu);
 
 function createCourse(e) {
-    console.log("Hello");
     e.preventDefault();
     $.post("api/services/create_course.php",
     {
@@ -129,6 +128,24 @@ function createCourse(e) {
     });
 }
 handler("submit","#createCourse",createCourse);
+
+function joinCourse(e) {
+    e.preventDefault();
+    $.post("api/services/join_course.php",
+    {
+        courseToken:$("#courseToken").val()
+    },
+    function(data) {
+        console.log(data);
+        data = JSON.parse(data);
+        if ("id" in data) {
+            loadController("course","#content",{"course":data["id"]});
+        } else {
+            $("#courseTokenError").html(data["error"]);
+        }
+    });
+}
+handler("submit","#joinCourse",joinCourse);
 
 $(document).ready(function() {
     window.onpopstate = stateHandler;
