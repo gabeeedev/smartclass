@@ -1,6 +1,6 @@
 <?php
 
-if (!file_exists("../util/config.php")) {
+if (!filesize("../util/config.php")) {
     require_once("install.php");
     exit();
 }
