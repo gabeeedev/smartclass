@@ -138,6 +138,7 @@ input:focus {
 } */
 
 .page-error {
+    padding:64px;
     font-size:64px;
     align-self:center;
     justify-self: center;

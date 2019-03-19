@@ -1,5 +1,10 @@
 <?php
 
+if (!file_exists("../util/config.php")) {
+    require_once("install.php");
+    exit();
+}
+
 require_once "../util/auth.php";
 
 loginRedirect();

@@ -23,7 +23,7 @@ if(isset($_POST["courseToken"]) && strlen($_POST["courseToken"]) == 7) {
             
         $data["id"] = $row["courseid"];
     } else {
-        $data["error"] = "Invalid token!";
+        $data["error"] = "Token not found!";
     }
 } else {
     $data["error"] = "Invalid token!";
