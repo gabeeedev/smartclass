@@ -1,6 +1,8 @@
 <?php
 
-$con = new PDO('mysql:host=localhost;dbname=smartclass', "root", "");
+require_once "config.php";
+
+$con = new PDO("mysql:host=" . $mysqlAddress . ";dbname=" . $mysqlDatabase, $mysqlUsername, $mysqlPassword);
 $con->query("SET NAMES utf8");
 
 function sql_select($sql, $array=array()) {

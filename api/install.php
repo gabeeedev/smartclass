@@ -1,17 +1,18 @@
 <?php
 
-require_once "../util/util.php";
+require_once "util/util.php";
 
 
 if (isset($_POST["install"])) {
     if (checkPostData([
-        "mysqlAddress","mysqlUsername","mysqlPassword","mysqlDatabase","mysqlPrefix",
+        "mysqlAddress","mysqlUsername","mysqlDatabase",
         "adminUsername","adminEmail","adminName","adminPassword"])) 
     {
         $sql = file_get_contents("install.sql");
         $sql = str_replace("`database`.`","`" . $_POST['mysqlDatabase'] . "`.`" . $_POST['mysqlPrefix'] . "_",$sql);
 
-        
+        $config = fopen("util/config.php","w+");
+        writeConfig($config,$_POST);
     }
 } else {
 
@@ -55,31 +56,14 @@ if (isset($_POST["install"])) {
 
 <script>
 
-    $("#installForm").submit(function() {
-    var mysqlAddress = $("#mysqlAddress");
-    var mysqlUsername = $("#mysqlUsername");
-    var mysqlPassword = $("#mysqlPassword");
-    var mysqlDatabase = $("#mysqlDatabase");
-    var mysqlPrefix = $("#mysqlPrefix");
-    var adminUsername = $("#adminUsername");
-    var adminPassword = $("#adminPassword");
-    var adminEmail = $("#adminEmail");
-    var adminName = $("#adminName");
-
-    $.post("install.php",{
-        "mysqlAddress":mysqlAddress,
-        "mysqlUsername":mysqlUsername,
-        "mysqlPassword":mysqlPassword,
-        "mysqlDatabase":mysqlDatabase,
-        "mysqlPrefix":mysqlPrefix,
-        "adminUsername":adminUsername,
-        "adminPassword":adminPassword,
-        "adminEmail":adminEmail,
-        "adminName":adminName
-    }, function() {
-        
+    $("#installForm").submit(function(e) {
+        e.preventDefault();
+        data = getFormInputs("installForm");
+        data.install = true;
+        $.post("api/install.php",data,function(data) {
+            console.log(data);
+        });
     });
-});
 
 </script>
 

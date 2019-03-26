@@ -3,17 +3,17 @@
 include "../util/util.php";
 include "../util/auth.php";
 
-if (checkPostData(["username", "email", "name", "password", "passwordRepeat"])) {
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $name = $_POST["name"];
-    $password = $_POST["password"];
-    $passwordRepeat = $_POST["passwordRepeat"];
+if (checkPostData(["registerUsername", "registerEmail", "registerName", "registerPassword", "registerRepeatPassword"])) {
+    $username = $_POST["registerUsername"];
+    $email = $_POST["registerEmail"];
+    $name = $_POST["registerName"];
+    $password = $_POST["registerPassword"];
+    $repeatPassword = $_POST["registerRepeatPassword"];
 
     $error = [];
     $test = true;
 
-    $test = $test && $password == $passwordRepeat;
+    $test = $test && $password == $repeatPassword;
     if(!$test) $error[] = "The passwords are different!";
     
     $account = getAccount($username,$email);

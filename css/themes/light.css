@@ -83,3 +83,50 @@ body {
 .page-error {
     color:#AAA;
 }
+
+.block {
+    background-color:#222;
+    color:#DDD;
+}
+
+.block-clickable {
+    background-color:#222;
+    color:#DDD;
+    transition: 0.5s;
+}
+.block-clickable:hover {
+    color:#FFF;
+    text-shadow: 0px 0px 4px #DDD;
+    background-color: #333;
+}
+
+.clickable {
+    color:#DDD;
+    transition: 0.5s;
+}
+.clickable:hover {
+    color:#FFF;
+    text-shadow: 0px 0px 4px #DDD;
+}
+
+.icon-48 {
+    color:#222;
+}
+
+.icon {
+    color:#222;
+}
+
+.icon-inverse {
+    color: #DDD;
+}
+
+.archived {
+    background-color:rgb(71, 29, 22)
+}
+
+.editable {
+    background-color:#fff;
+    border:1px solid #ced4da;
+    color:#495057;
+}

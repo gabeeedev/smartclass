@@ -84,11 +84,3 @@ function loginDie() {
 //     isset($_SESSION["current_class"]["isStudent"]) &&
 //     $_SESSION["current_class"]["isStudent"];
 // }
-
-function isTeacher($cid) {
-    return sql_select_unique("SELECT * FROM teaches JOIN courses ON course=courseid WHERE user = ? AND course = ?",[$_SESSION["user"]["userid"],$cid]);
-}
-
-function isStudent($cid) {
-    return sql_select_unique("SELECT * FROM attends JOIN courses ON course=courseid WHERE user = ? AND course = ?",[$_SESSION["user"]["userid"],$cid]);
-}

@@ -5,10 +5,10 @@ require_once "../util/util.php";
 
 // loginRedirect();
 
-if (checkPostData(["username", "password"])) {
+if (checkPostData(["loginUsername", "loginPassword"])) {
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = $_POST["loginUsername"];
+    $password = $_POST["loginPassword"];
 
     $data = getAccount($username,$username);
 

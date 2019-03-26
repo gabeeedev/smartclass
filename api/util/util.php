@@ -1,5 +1,7 @@
 <?php
 
+require_once "constants.php";
+
 function checkPostData($fields) {
     foreach($fields as $v) {
         if(!isset($_POST[$v]) || strlen($_POST[$v]) == 0) {
@@ -36,4 +38,11 @@ function generateToken($len) {
         $token .= $chars[rand(0,strlen($chars)-1)];
     }
     return $token;
+}
+
+function writeConfig($res,$data) {
+    fwrite($res,"<?php" . PHP_EOL . PHP_EOL);
+    foreach ($data as $k => $v) {        
+        fwrite($res,"$" . $k . " = '" . $v . "';" . PHP_EOL);
+    }
 }

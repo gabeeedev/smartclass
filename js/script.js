@@ -14,6 +14,7 @@ function load(page, tar, options={},save=true) {
                 history.pushState({"page":page,"options":options,"target":tar},null,null);
             }
             // refreshCallbacks();
+            fixMenu();
             $(tar).fadeIn(200);
         });
     });
@@ -46,17 +47,25 @@ function redirect(e) {
 }
 handler("click","[redirect]",redirect);
 
-function login(e) {
-    e.preventDefault();
-    var username = $("#loginUsername").val();
-    var password = $("#loginPassword").val();
+function getFormInputs(formId) {
+    // console.log($("#" + formId + " input"));
+    t = {};
+    $("#" + formId + " input").each((k,v) => {
+        t[v.id] = v.value;
+    });
 
-    $.post("api/services/login.php",
-        {
-            "username":username,
-            "password":password
-        },
-        function(data) {
+    $("#" + formId + " select").each((k,v) => {
+        t[v.id] = v.value;
+    });
+    return t;
+}
+
+function login(e) {
+    
+    e.preventDefault();
+    data = getFormInputs("loginForm");
+
+    $.post("api/services/login.php",data,function(data) {
             loadController("index","#page");
         }
     );
@@ -65,21 +74,10 @@ handler("submit","#loginForm",login);
 
 function register(e) {
     e.preventDefault();
-    var username = $("#registerUsername").val();
-    var email = $("#registerEmail").val();
-    var name = $("#registerName").val();
-    var password = $("#registerPassword").val();
-    var repeatPassword = $("#registerRepeatPassword").val();
+    data = getFormInputs("registerForm");
+    console.log(data);
 
-    $.post("api/services/register.php",
-        {
-            "username":username,            
-            "email":email,
-            "name":name,
-            "password":password,
-            "passwordRepeat":repeatPassword
-        },
-        function(data) {
+    $.post("api/services/register.php",data,function(data) {
             if(data == "1") {
                 loadController("index","#page");
             } else {
@@ -97,10 +95,16 @@ function logout() {
 }
 handler("click","[request=logout]",logout);
 
+function fixMenu() {
+    var px = MENU_STATE == 1 ? "224px" : "64px";
+    $("#menu").css("width",px);
+    $("#content").css("marginLeft",px);
+}
+
 function toggleMenu() {
 
-    var px = MENU_STATE == 1 ? "64px" : "224px";
     MENU_STATE = 1 - MENU_STATE;
+    var px = MENU_STATE == 1 ? "224px" : "64px";    
 
     $("#menu").animate({
         width:px
@@ -121,7 +125,7 @@ function createCourse(e) {
     function(data) {
         data = JSON.parse(data);
         if ("id" in data) {
-            loadController("course","#content",{"course":data["id"]});
+            loadController("course","#page",{"course":data["id"]});
         } else {
             $("#courseNameError").html(data["error"]);
         }
@@ -139,7 +143,7 @@ function joinCourse(e) {
         console.log(data);
         data = JSON.parse(data);
         if ("id" in data) {
-            loadController("course","#content",{"course":data["id"]});
+            loadController("course","#page",{"course":data["id"]});
         } else {
             $("#courseTokenError").html(data["error"]);
         }
@@ -158,3 +162,76 @@ function stateHandler(data) {
         load(state.page,state.target,state.options,false);
     }
 }
+
+function changeListStyle(e) {
+    
+    to = $(e.target).attr("list-to");
+    cur = $(".list-changeable").attr("list-style");
+    $(".list-changeable > div").each(function(k,v) {
+        $(v).removeClass(cur);
+        $(v).addClass(to);
+    });
+    $(".list-changeable").attr("list-style",to);
+}
+handler("click",".list-changer",changeListStyle);
+
+// 
+// File upload
+// 
+function uploadFile(formId, target, feedback) {
+    var formData = new FormData(document.getElementById(formId));
+    $.ajax({
+        url: target,
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: feedback
+      });
+}
+
+handler("change","#materialFile",function(e) {    
+    $("[for='materialFile']").html($("#materialFile").val().split('\\').slice(-1)[0]);
+})
+
+// 
+// Materials
+// 
+function materialFileUpload(e) {
+    e.preventDefault();
+    uploadFile("materialFileForm","api/services/material_file_upload.php",function(data) {
+        data = JSON.parse(data);
+        if (data.success) {
+
+            s = "<div class='py-2 f-row'><div class='border border-success p-3 rounded d-flex flex-row'>" +
+            "<div class='flex-max'>" + data.title + "</div>" +
+            "<div class='flex-static'>" + data.file + "</div>" +
+            "<div></div>"
+            
+            $("#materialFileList").append(s);
+        }
+        
+    });
+}
+handler("submit","#materialFileForm",materialFileUpload);
+
+function materialSubmit(e) {
+    e.preventDefault();
+    data = getFormInputs("materialForm");
+    data.materialContent = $("#" + $("#materialContent").attr("medium-editor-textarea-id")).html();
+    
+    $.post("api/services/material_edit.php",data,function(data) {
+        // data = JSON.parse(data);
+        console.log(data);
+    });
+}
+handler("submit","#materialForm",materialSubmit);
+
+function materialShare(e) {
+    e.preventDefault();
+    data = getFormInputs("materialShareForm");
+    $.post("api/services/course_material_share.php",data,function(data) {
+        console.log(data);
+    });
+}
+handler("submit","#materialShareForm",materialShare);
