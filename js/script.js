@@ -199,6 +199,9 @@ handler("change","#materialFile",function(e) {
 // 
 function materialFileUpload(e) {
     e.preventDefault();
+    button = $("#materialFileForm button");
+    button.prop("disabled",true);
+    button.html('<i class="material-icons">loud_upload</i>');
     uploadFile("materialFileForm","api/services/material_file_upload.php",function(data) {
         data = JSON.parse(data);
         if (data.success) {
@@ -209,8 +212,11 @@ function materialFileUpload(e) {
             "<div></div>"
             
             $("#materialFileList").append(s);
+        } else {
+
         }
-        
+        button.prop("disabled",false);  
+        button.html('Upload');      
     });
 }
 handler("submit","#materialFileForm",materialFileUpload);
@@ -221,8 +227,10 @@ function materialSubmit(e) {
     data.materialContent = $("#" + $("#materialContent").attr("medium-editor-textarea-id")).html();
     
     $.post("api/services/material_edit.php",data,function(data) {
-        // data = JSON.parse(data);
-        console.log(data);
+        data = JSON.parse(data);
+        if (data.success) {
+            loadController("material_list","#content");
+        }
     });
 }
 handler("submit","#materialForm",materialSubmit);

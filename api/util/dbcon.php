@@ -46,3 +46,18 @@ function sql_insert($table, $array) {
     sql_query("INSERT INTO " . $table . " (" . implode(", ",array_keys($array)) . ") VALUES (" . implode(", ",array_keys($data)) . ")", $data);
     return $con->lastInsertId();
 }
+
+function sql_update_by_id($table,$array,$idcol,$id) {
+    GLOBAL $con;
+
+    $data = [];
+    foreach ($array as $k => $v) {
+        $data[":" . $k] = $v;
+    }
+    $data[":" . $idcol] = $id;
+    $cols = [];
+    foreach ($array as $k => $v) {
+        $cols[] = $k . " = " . ":" . $k;
+    }
+    sql_query("UPDATE " . $table . " SET " . implode(", ",$cols) . " WHERE " . $idcol . " = :" . $idcol,$data);
+}

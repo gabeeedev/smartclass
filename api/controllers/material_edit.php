@@ -33,7 +33,7 @@ $_SESSION["materialFiles"] = [];
 
         <?php
             if (isset($_GET["edit"])) {
-                echo "<input type='hidden' value='" . $_GET["edit"] . "'>";
+                echo "<input type='hidden' value='" . $_GET["edit"] . "' id='edit'>";
             }
         ?>
 
