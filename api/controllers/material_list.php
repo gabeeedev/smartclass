@@ -3,10 +3,7 @@ require_once "../util/auth.php";
 require_once "../util/util.php";
 
 loginRedirect();
-// echo "dfsd";
 $materials = sql_select("SELECT * FROM materials WHERE author = ? ORDER BY status, materialid DESC",[$_SESSION["user"]["userid"]]);
-// printArray($materials);
-// printArray($_SESSION);
 ?>
 <div class="w-100 p-2 icon-48">
     <i class="material-icons cursor-pointer list-changer" list-to="f-box">

@@ -38,6 +38,16 @@ body, html {
     overflow: hidden;
 }
 
+.side-bar-title {
+    font-size: 24px;
+    font-weight: bold;
+    /* line-height: 48px;
+    height: 48px;
+    vertical-align: middle; */
+    padding:8px 16px;
+    display:flex;
+}
+
 .exit-control {
     margin-top:auto;
 }

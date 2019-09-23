@@ -13,6 +13,7 @@ function isStudent($cid) {
 function setCurrentCourse($cid) {
     $_SESSION["course"] = [];
     $_SESSION["course"]["id"] = $cid;
+    $_SESSION["course"]["data"] = sql_select_unique("SELECT * FROM courses WHERE courseid = ?",[$cid]);
     
     if (isTeacher($cid)) {    
         $_SESSION["course"]["as"] = "teacher";

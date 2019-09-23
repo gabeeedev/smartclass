@@ -153,6 +153,8 @@ handler("submit","#joinCourse",joinCourse);
 
 $(document).ready(function() {
     window.onpopstate = stateHandler;
+    // state = window.history.state;
+    // load(state.page,state.target,state.options,false);
     loadController("index","#page");
 });
 
@@ -241,5 +243,6 @@ function materialShare(e) {
     $.post("api/services/course_material_share.php",data,function(data) {
         console.log(data);
     });
+    loadController("course_materials","#content",{"course":data["id"]});
 }
 handler("submit","#materialShareForm",materialShare);
