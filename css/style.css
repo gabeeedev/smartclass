@@ -162,6 +162,14 @@ input:focus {
 
 .editable {
     min-height:20vh !important;
+    resize: none !important;
+}
+
+.comment {
+    /* line-height: 1.5rem !important; */
+    padding: .375rem .75rem;
+    box-sizing: border-box;
+    resize:none !important;
 }
 
 .icon-48 .material-icons{

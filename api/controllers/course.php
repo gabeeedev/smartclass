@@ -26,7 +26,7 @@ if (isset($_SESSION["course"]["as"])) {
         <div class="side-bar-text">Back</div>
     </div>
     <div class="side-bar-title mt-4"><?=$_SESSION["course"]["data"]["title"]?></div>
-    <div class="side-bar-item" redirect="debug" target="#content">
+    <div class="side-bar-item" redirect="course_home" target="#content">
         <div class="side-bar-icon"><i class="material-icons">home</i></div>
         <div class="side-bar-text">Home</div>
     </div>
@@ -64,7 +64,9 @@ if (isset($_SESSION["course"]["as"])) {
     </div>
 </div>
 <div id="content" class="content">
-
+    <?php
+        include("course_home.php");
+    ?>
 </div>
 <?php
 

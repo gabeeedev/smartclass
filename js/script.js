@@ -242,7 +242,17 @@ function materialShare(e) {
     data = getFormInputs("materialShareForm");
     $.post("api/services/course_material_share.php",data,function(data) {
         console.log(data);
-    });
-    loadController("course_materials","#content",{"course":data["id"]});
+        loadController("course_materials","#content",{"course":data});
+    });    
 }
 handler("submit","#materialShareForm",materialShare);
+
+function coursePost(e) {
+    e.preventDefault();
+    data = {"postContent":$("#postContent").val().replace(/\n/g,"<br>")};
+    $.post("api/services/course_post_edit.php",data,function(data) {
+        console.log(data);
+        loadController("course_home","#content",{"course":data});
+    })
+}
+handler("submit","#postForm",coursePost);

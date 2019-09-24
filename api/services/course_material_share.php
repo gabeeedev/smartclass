@@ -11,3 +11,5 @@ if (isset($_POST["materialShare"]) && asTeacher()) {
 
     sql_insert("material_shared",["material" => $material, "course" => $_SESSION["course"]["id"],"available_from" => $from, "available_to" => $to]);
 }
+
+echo $_SESSION["course"]["id"];
