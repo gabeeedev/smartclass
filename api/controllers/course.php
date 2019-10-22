@@ -34,11 +34,11 @@ if (isset($_SESSION["course"]["as"])) {
         <div class="side-bar-icon"><i class="material-icons">folder</i></div>
         <div class="side-bar-text">Materials</div>
     </div>
-    <div class="side-bar-item" redirect="debug" target="#content">
+    <div class="side-bar-item" redirect="course_assignment_list" target="#content">
         <div class="side-bar-icon"><i class="material-icons">assignment</i></div>
         <div class="side-bar-text">Assigments</div>
     </div>
-    <div class="side-bar-item" redirect="debug" target="#content">
+    <div class="side-bar-item" redirect="course_grading_list" target="#content">
         <div class="side-bar-icon"><i class="material-icons">bar_chart</i></div>
         <div class="side-bar-text">Grades</div>
     </div>

@@ -1,4 +1,13 @@
 var MENU_STATE = 1;
+var headerGuards = {};
+function def(s)
+{
+    headerGuards[s] = true;
+}
+
+function ifndef(s) {
+    return !(headerGuards[s] === true);
+}
 
 function handler(events, target, func) {
     $(document).on(events,target,func);
@@ -256,3 +265,78 @@ function coursePost(e) {
     })
 }
 handler("submit","#postForm",coursePost);
+
+function commentPost(e) {
+    e.preventDefault();
+    data = {
+        "commentContent":$(this).find("textarea").val().replace(/\n/g,"<br>"),
+        "postId":$(this).attr("postId")
+    };
+    $.post("api/services/course_comment_edit.php",data,function(data) {
+        loadController("course_home","#content",{"course":data});
+    })
+}
+handler("submit",".commentForm",commentPost);
+
+function resizeTextarea(e) {
+    console.log($(this)[0].scrollHeight);
+    $(this).height(0);
+    $(this).height($(this)[0].scrollHeight-16);
+}
+handler("change keyup",".resize-textarea",resizeTextarea);
+
+function assigmentEdit(e) {
+    e.preventDefault();
+
+    ext = $("#assignmentExt").val().split(/,[ ]*|,/);
+    ext = ext.map(x => x.toLowerCase());
+    ext = Array.from(new Set(ext));
+
+    data = {
+        "assignmentTitle":$("#assignmentTitle").val(),
+        "assignmentContent":$("#" + $("#assignmentContent").attr("medium-editor-textarea-id")).html(),
+        "assignmentFrom":$("#fromPicker").val(),
+        "assignmentTo":$("#toPicker").val(),
+        "assignmentExt":ext
+    }
+
+    $.post("api/services/course_assignment_edit.php",data,function(data) {
+        loadController("course_assignment_list","#content");
+    });
+
+}
+handler("submit","#assignmentForm",assigmentEdit);
+
+function assignmentSolution(e) {
+    e.preventDefault();
+    uploadFile("assignmentSolutionForm","api/services/course_assignment_solution.php",function(data) {
+        loadController("course_assignment","#content",{"id":data});
+    });
+}
+handler("submit","#assignmentSolutionForm",assignmentSolution);
+
+function gradingEdit(e) {
+    e.preventDefault();
+    data = {
+        "gradingTitle": $("#gradingTitle").val(),
+        "gradingDescription": $("#gradingDescription").val(),
+        "gradingMin":$("#gradingMin").val(),
+        "gradingMax":$("#gradingMax").val(),
+        "gradingPublicScores":$("#gradingPublicScores").is(":checked")
+    };
+    $.post("api/services/course_grading_edit.php",data,function(data) {
+        console.log(data);
+        // loadController("course_grading_list","#content");
+    });
+}
+handler("submit","#gradingForm",gradingEdit);
+
+function saveGrades(e) {
+    data = {
+        "grading":$("#gradingId"),
+        "grades":[
+
+        ]
+    }
+}
+handler("click","#saveGradesButton",saveGrades);

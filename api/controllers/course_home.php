@@ -1,16 +1,16 @@
 <?php
 
-require_once "../util/auth.php";
+require_once "../util/course.php";
 require_once "../util/util.php";
 
 loginRedirect();
 
 ?>
 
+
+
+<div class="w-50 d-flex flex-wrap m-auto">
 <h1><b><?=$_SESSION["course"]["data"]["title"]?></b></h1>
-
-<div class="w-50 d-flex flex-wrap">
-
 <div class="f-row p-2">
     <div class="block p-3 rounded d-flex flex-column">
         <h3>New post</h3>
@@ -44,14 +44,34 @@ loginRedirect();
                 <div class="d-flex">
                     <?=$row["content"]?>
                 </div>                
-                    <form class="commentForm">
-                        <div class="d-flex flex-row mt-4">
-                            <div class="d-flex w-100 pr-2">
-                                <textarea class="comment w-100" id="commentContent"></textarea>
-                            </div>
-                            <div><button type="submit" class="btn btn-primary ml-auto">Comment</button></div>
+                <form class="commentForm" postId="<?=$row["postid"]?>">
+                    <div class="d-flex flex-row mt-4">
+                        <div class="d-flex w-100 pr-2">
+                            <textarea class="comment w-100 resize-textarea"></textarea>
                         </div>
-                    </form>
+                        <div><button type="submit" class="btn btn-primary ml-auto">Comment</button></div>
+                    </div>
+                </form>
+                <?php
+                    $comments = sql_select("SELECT u.name, c.postDate, c.content FROM comments c, users u WHERE c.user = u.userid AND c.post = ? ORDER BY c.postDate DESC",[$row["postid"]]);
+                    foreach ($comments as $com) {
+                        ?>
+                            <div class="mt-4">
+                                <div class="d-flex flex-row pb-1">
+                                    <div class="d-flex font-italic small">
+                                        <b><?=$com["name"]?></b>
+                                    </div>
+                                    <div class="d-flex ml-auto font-italic small">
+                                        <?=$com["postDate"]?>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <?=$com["content"]?>
+                                </div>  
+                            </div>
+                        <?php
+                    }
+                ?>
             </div>
         </div>
             

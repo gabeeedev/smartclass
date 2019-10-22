@@ -167,9 +167,16 @@ input:focus {
 
 .comment {
     /* line-height: 1.5rem !important; */
-    padding: .375rem .75rem;
-    box-sizing: border-box;
+    
+}
+
+.resize-textarea {
+    height: 42px;
+    line-height: 24px !important;
+    padding: 8px 8px;
+    /* box-sizing: border-box; */
     resize:none !important;
+    overflow: hidden;
 }
 
 .icon-48 .material-icons{
@@ -201,4 +208,13 @@ input:focus {
     .f-box {
         flex-basis: 100%;
     }
+}
+
+.badge-list {
+    padding:4px;
+}
+.badge-list .badge {
+    padding:4px 8px;
+    margin:2px;
+    min-width: 40px;
 }

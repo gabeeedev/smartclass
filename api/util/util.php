@@ -4,11 +4,11 @@ require_once "constants.php";
 
 function checkPostData($fields) {
     foreach($fields as $v) {
-        if(!isset($_POST[$v]) || strlen($_POST[$v]) == 0) {
-            return false;
+        if(isset($_POST[$v]) && (is_array($_POST[$v]) || strlen($_POST[$v]) > 0)) {
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 function debug($v) {
@@ -38,6 +38,12 @@ function generateToken($len) {
         $token .= $chars[rand(0,strlen($chars)-1)];
     }
     return $token;
+}
+
+function getFile($file) {
+    $ext = explode(".",$file);
+    $name = array_splice($ext,0,count($ext)-1);
+    return ["name" => implode(".",$name), "ext" => $ext[0]];
 }
 
 function writeConfig($res,$data) {

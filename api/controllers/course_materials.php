@@ -10,8 +10,9 @@ if(asTeacher()) {
     
     ?>
         <h2>Share material</h2>
+        
         <form id="materialShareForm">
-            <div class="row">
+            <div class="row">            
                 <div class="form-group col-12">
                     <label for="materialShare">Material</label>
                     <select class="form-control" id="materialShare">
@@ -22,84 +23,13 @@ if(asTeacher()) {
                         ?>
                     </select>
                 </div>
-                <div class="mb-2 col-12 text-center">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-dark datepicker-quick" datepicker-cmd="prev">-</button>
-                        <button type="button" class="btn btn-dark datepicker-quick" datepicker-cmd="day">This day</button>
-                        <button type="button" class="btn btn-dark datepicker-quick" datepicker-cmd="week">This week</button>
-                        <button type="button" class="btn btn-dark datepicker-quick" datepicker-cmd="month">This month</button>
-                        <button type="button" class="btn btn-dark datepicker-quick" datepicker-cmd="year">This year</button>
-                        <button type="button" class="btn btn-dark datepicker-quick" datepicker-cmd="next">+</button>
-                    </div>
-                </div>
-                <div class="form-group col-6">
-                    <label for="fromPicker">Available from</label>
-                    <input type="text" class="form-control datetimepicker-input" id="fromPicker" data-toggle="datetimepicker" data-target="#fromPicker"/>
-                </div>
-                <div class="form-group col-6">
-                    <label for="toPicker">Available to</label>
-                    <input type="text" class="form-control datetimepicker-input" id="toPicker" data-toggle="datetimepicker" data-target="#toPicker"/>
-                </div>
+                <?php include "../util/timepicker.html"; ?>
+                
                 <div class="mb-4 col-12">
                     <button type="submit" class="btn btn-primary px-4">Share</button>
                 </div>
-                
             </div>
-            
-            
-           
-            <!-- <div class="f-static p-2">
-                <button type="submit" class="btn btn-primary">Share</button>
-            </div> -->
-            
-        </form>      
-
-        <script>
-            options = {
-                sideBySide:true,
-                format:"YYYY-MM-DD HH:mm"
-            };
-
-            $(function() {
-                $("#fromPicker").datetimepicker(options);
-                $("#toPicker").datetimepicker(options);
-            });
-
-            $(".datepicker-quick").click(function() {
-                switch ($(this).attr("datepicker-cmd")) {
-                    case "day":
-                        $("#fromPicker").datetimepicker("date",moment().startOf("day"));
-                        $("#toPicker").datetimepicker("date",moment().endOf("day"));
-                        break;
-                    case "week":
-                        $("#fromPicker").datetimepicker("date",moment().startOf("week"));
-                        $("#toPicker").datetimepicker("date",moment().endOf("week"));
-                        break;
-                    case "month":
-                        $("#fromPicker").datetimepicker("date",moment().startOf("month"));
-                        $("#toPicker").datetimepicker("date",moment().endOf("month"));
-                        break;
-                    case "year":
-                        $("#fromPicker").datetimepicker("date",moment().startOf("year"));
-                        $("#toPicker").datetimepicker("date",moment().endOf("year"));
-                        break;                
-                    case "next":
-                        var to = moment($("#toPicker").datetimepicker("date"));
-                        var from = moment($("#fromPicker").datetimepicker("date"));
-                        $("#fromPicker").datetimepicker("date",from.add(1,"days"));
-                        $("#toPicker").datetimepicker("date",to.add(1,"days"));
-                        break;                
-                    case "prev":
-                        var to = moment($("#toPicker").datetimepicker("date"));
-                        var from = moment($("#fromPicker").datetimepicker("date"));
-                        $("#fromPicker").datetimepicker("date",from.add(-1,"days"));
-                        $("#toPicker").datetimepicker("date",to.add(-1,"days"));
-                        break;                
-                    default:
-                        break;
-                }
-            });
-        </script>
+        </form>
     <?php
 }
 ?>
