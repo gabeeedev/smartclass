@@ -324,6 +324,7 @@ function gradingEdit(e) {
         "gradingMax":$("#gradingMax").val(),
         "gradingPublicScores":$("#gradingPublicScores").is(":checked")
     };
+    console.log(data);
     $.post("api/services/course_grading_edit.php",data,function(data) {
         console.log(data);
         // loadController("course_grading_list","#content");
@@ -332,11 +333,30 @@ function gradingEdit(e) {
 handler("submit","#gradingForm",gradingEdit);
 
 function saveGrades(e) {
-    data = {
-        "grading":$("#gradingId"),
-        "grades":[
+    e.preventDefault();
 
-        ]
+    $(this).attr("disabled",true);
+    $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Saving...');
+
+    grades = [];
+
+    $("tr[uid]").each(function() {
+        grades.push({
+            "id":$(this).attr("uid"),
+            "grade":$(this).find("[data=gradeGrade]").val(),
+            "comment":$(this).find("[data=gradeComment]").val()
+        });
+    });
+
+    data = {
+        "grading":$("#gradingId").val(),
+        "grades":grades
     }
+    
+    $.post("api/services/course_grades_edit.php",data,function(data) {
+        $("#saveGradesButton").attr("disabled",false);
+        $("#saveGradesButton").html('Saved');
+        loadController("course_grading_list","#content");
+    });
 }
 handler("click","#saveGradesButton",saveGrades);

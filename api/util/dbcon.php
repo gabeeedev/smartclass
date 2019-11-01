@@ -61,3 +61,56 @@ function sql_update_by_id($table,$array,$idcol,$id) {
     }
     sql_query("UPDATE " . $table . " SET " . implode(", ",$cols) . " WHERE " . $idcol . " = :" . $idcol,$data);
 }
+
+function sql_multiple_insert($table,$cols,$datas) {
+    GLOBAL $con;
+
+    $valq = "(";
+
+    for ($i=0; $i < count($cols)-1; $i++) { 
+        $valq .= "?,";
+    }
+
+    $valq .= "?)";
+
+    $sql = "INSERT INTO " . $table . " (" . implode(", ",array_values($cols)) . ") VALUES " . $valq;
+    $query = $con->prepare($sql);
+
+    $ids = [];
+    
+    foreach($datas as $data) {
+        $query->execute($data);
+        array_push($ids,$con->lastInsertId());
+    }
+
+    return $ids;
+}
+
+function sql_multiple_update_by_id($table,$idcol,$cols,$datas) {
+    GLOBAL $con;
+
+    $t = [];
+
+    foreach($cols as $v) {
+        array_push($t,$v . " = ?");
+    }    
+
+    $sql = "UPDATE $table SET " . implode(", ",$t) . " WHERE $idcol = ?";
+    $query = $con->prepare($sql);
+
+    
+    foreach($datas as $data) {
+        $query->execute($data);
+    }
+}
+
+function sql_multiple_delete_by_id($table,$id,$data) {
+    GLOBAL $con;
+
+    $sql = "DELETE FROM $table WHERE $id = ?";
+    $query = $con->prepare($sql);
+
+    foreach($data as $v) {
+        $query->execute([$v]);
+    }
+}
