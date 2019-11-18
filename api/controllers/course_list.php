@@ -22,10 +22,12 @@ loginRedirect();
                 $data = sql_select("SELECT * FROM attends JOIN courses ON course=courseid WHERE user = ?",[$_SESSION["user"]["userid"]]);
                 foreach ($data as $k => $v) {
                     ?>
-                        <div class="course-box course-active" <?="redirect='course' target='#page' options='course:" . $v["course"] . "'"?>>
-                            <h2><?=$v["title"]?></h2>
+                    <div class="f-box p-2">
+                        <div class="block p-3">
+                            <h2 class="clickable" <?="redirect='course' target='#page' options='course:" . $v["course"] . "'"?>><?=$v["title"]?></h2>
                             <span><?=$v["token"]?></span>
                         </div>
+                    </div>
                     <?php
                 }
             ?>
@@ -43,15 +45,18 @@ loginRedirect();
             </div>        
         </form>
 
-        <div class="course-list">        
+        <div class="d-flex flex-wrap">        
             <?php
                 $data = sql_select("SELECT * FROM teaches JOIN courses ON course=courseid WHERE user = ?",[$_SESSION["user"]["userid"]]);
                 foreach ($data as $k => $v) {
                     ?>
-                        <div class="course-box course-active" <?="redirect='course' target='#page' options='course:" . $v["course"] . "'"?>>
-                            <h2><?=$v["title"]?></h2>
+                    <div class="f-box p-2">
+                        <div class="block p-3">
+                            <h2 class="clickable" <?="redirect='course' target='#page' options='course:" . $v["course"] . "'"?>><?=$v["title"]?></h2>
                             <span><?=$v["token"]?></span>
                         </div>
+                    </div>
+                        
                     <?php
                 }
             ?>

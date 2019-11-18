@@ -39,12 +39,23 @@ $list = sql_select("SELECT * FROM gradings WHERE course = ? ORDER BY gradingDate
                     <div class="font-weight-bold clickable flex-max mr-4" redirect="course_grading" target="#content" options=<?="id:" . $row["gradingid"]?>>
                         <?=$row["title"]?>
                     </div>
-                            <span class="mx-4 font-italic"><?=$row["gradingDate"]?></span>
+                    <?php 
+                    if(asStudent()) {
+                        $t = sql_select_unique("SELECT g.grade, gr.min, gr.max FROM gradings gr, grades g, users u WHERE gr.gradingid = g.grading AND g.user = u.userid AND g.user = ? AND gr.gradingid = ?",[$_SESSION["user"]["userid"],$row["gradingid"]]);
+                        
+                        
+                        if ($t !== false) {
+                            $percent = (floatval($t["grade"]) - floatval($t["min"])) / (floatval($t["max"]) - floatval($t["min"]));
+                            $rgb = "rgb(" . intval(50+(1-$percent)*150) . "," . intval(50+$percent*150) . ",0)";
+                            echo "<span class='grade' style='background-color:" . $rgb . ";'>" . $t["grade"] . "/" . $t["max"] . "</span>";
+                        }
+                    } 
+                    ?>   
+                            <span class="mx-4 font-italic"><?=date("Y. M. d. H:i",strtotime($row["gradingDate"]))?></span>
                     <?php if (asTeacher()) { ?> 
-
                             <i class="material-icons flex-static mx-1 clickable" redirect="course_grading_edit" target="#content" options=<?="edit:" . $row["gradingid"]?>>edit</i>
                             <i class="material-icons flex-static mx-1 clickable">delete</i>
-                    <?php } ?>                    
+                    <?php } ?>               
                 </div>
             </div>
                 

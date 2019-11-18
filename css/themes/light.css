@@ -3,7 +3,7 @@ body {
 }
 
 .side-bar {
-    background-color:#222;
+    background-color:rgb(32, 44, 51);
     color:#EEE;
 }
 
@@ -12,12 +12,10 @@ body {
 }
 
 .side-bar-item:hover {
-    background-color:#333;
+    background-color:rgb(52, 84, 102);
     color:#FFF;
     text-shadow: 0px 0px 8px white;
 }
-
-
 
 .login-form {
     background-color:#FFF;
@@ -87,8 +85,12 @@ body {
 }
 
 .block {
-    background-color:#222;
-    color:#DDD;
+    background-color:#F9F9F9;
+    border-radius: 4px;
+    border:2px solid rgb(36, 137, 196);
+    border-left: 8px solid rgb(36, 137, 196);
+    /* background-color:#DDD; */
+    color:#222;
 }
 
 .block-clickable {
@@ -103,12 +105,12 @@ body {
 }
 
 .clickable {
-    color:#DDD;
+    color:#222;
     transition: 0.5s;
 }
 .clickable:hover {
-    color:#FFF;
-    text-shadow: 0px 0px 4px #DDD;
+    color:rgb(29, 107, 153);
+    text-shadow: 0px 0px 4px rgb(148, 221, 255);
 }
 
 .icon-48 {
@@ -124,11 +126,38 @@ body {
 }
 
 .archived {
-    background-color:rgb(71, 29, 22)
+    border:2px solid rgb(153, 29, 29);
+    border-left: 8px solid rgb(153, 29, 29);
+    background-color:rgb(204, 188, 185)
 }
+.archived .clickable:hover {
+    color:rgb(153, 29, 29);
+    text-shadow: 0px 0px 4px rgb(255, 148, 148)
+}
+
 
 .editable {
     background-color:#fff;
     border:1px solid #ced4da;
     color:#495057;
+}
+
+.list-changer {
+    color: rgb(42, 64, 77);
+}
+
+.grade {
+    color:#FFF;
+}
+
+.post-block {
+    background-color:#F9F9F9;
+    border-radius: 4px;
+    border:1px solid rgb(36, 137, 196);
+    /* background-color:#DDD; */
+    color:#222;
+}
+
+.btn-normal {
+    background-color:rgb(36, 137, 196);
 }

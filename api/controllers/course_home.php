@@ -12,7 +12,7 @@ loginRedirect();
 <div class="w-50 d-flex flex-wrap m-auto">
 <h1><b><?=$_SESSION["course"]["data"]["title"]?></b></h1>
 <div class="f-row p-2">
-    <div class="block p-3 rounded d-flex flex-column">
+    <div class="post-block p-3 rounded d-flex flex-column">
         <h3>New post</h3>
         <form id="postForm">
             <div class="form-group mt-4">
@@ -31,8 +31,8 @@ loginRedirect();
 
     foreach($posts as $row) {
         ?>
-        <div class="f-row p-2">
-            <div class="block p-3 rounded d-flex flex-column">
+        <div class="f-row p-2 pt-4">
+            <div class="post-block p-3 rounded d-flex flex-column">
                 <div class="d-flex flex-row pb-2">
                     <div class="d-flex">
                         <b><?=$row["name"]?></b>
