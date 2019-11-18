@@ -5,7 +5,6 @@ require_once "../util/util.php";
 
 loginRedirect();
 if (checkPostData(["gradingTitle","gradingDescription","gradingMin","gradingMax"]) && asTeacher()) {
-    var_dump($_POST["gradingPublicScores"]);
     sql_insert("gradings",[
         "title" => $_POST["gradingTitle"],
         "description" => $_POST["gradingDescription"],
