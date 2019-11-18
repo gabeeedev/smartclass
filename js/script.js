@@ -324,10 +324,8 @@ function gradingEdit(e) {
         "gradingMax":$("#gradingMax").val(),
         "gradingPublicScores":$("#gradingPublicScores").is(":checked")
     };
-    console.log(data);
     $.post("api/services/course_grading_edit.php",data,function(data) {
-        console.log(data);
-        // loadController("course_grading_list","#content");
+        loadController("course_grading_list","#content");
     });
 }
 handler("submit","#gradingForm",gradingEdit);
