@@ -358,3 +358,37 @@ function saveGrades(e) {
     });
 }
 handler("click","#saveGradesButton",saveGrades);
+
+function addNewAnswer(e) {
+    e.preventDefault();
+
+    $("#votingAnswerList").html(
+        $("#votingAnswerList").html() + `
+        <div class='form-group col-12'>
+            <input type='text' class='form-control' name='votingAnswer'>
+        </div>`
+    );
+}
+handler("click","#votingAddNewAnswer",addNewAnswer);
+
+function votingEdit(e) {
+    e.preventDefault();
+    data = {
+        "votingTitle": $("#votingTitle").val(),
+        "votingDescription": $("#votingDescription").val(),
+        "votingFrom":$("#fromPicker").val(),
+        "votingTo":$("#toPicker").val(),
+        "votingMultiple":$("#votingMultiple").is(":checked"),
+        "votingAnonymous":$("#votingAnonymous").is(":checked"),
+        "votingResult":$("#votingResult").is(":checked"),
+        "votingAnswers": $("[name=votingAnswer]").map(function() {return $(this).val();}).get()
+    };
+
+    console.log(data);
+
+    $.post("api/services/course_voting_edit.php",data,function(data) {
+        console.log(data);
+        loadController("course_voting_list","#content");
+    });
+}
+handler("submit","#votingForm",votingEdit);

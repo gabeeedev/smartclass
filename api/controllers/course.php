@@ -42,7 +42,7 @@ if (isset($_SESSION["course"]["as"])) {
         <div class="side-bar-icon"><i class="material-icons">bar_chart</i></div>
         <div class="side-bar-text">Grades</div>
     </div>
-    <div class="side-bar-item" redirect="debug" target="#content">
+    <div class="side-bar-item" redirect="course_voting_list" target="#content">
         <div class="side-bar-icon"><i class="material-icons">how_to_vote</i></div>
         <div class="side-bar-text">Votes</div>
     </div>
