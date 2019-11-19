@@ -8,7 +8,7 @@ loginRedirect();
 $id = $_GET["id"];
 
 $voting = sql_select_unique("SELECT * FROM voting WHERE voting_id = ?",[$id]);
-$list = sql_select("SELECT voting_opt_id, title, COUNT(user) votes FROM voting_options vo, votes v WHERE vo.voting_opt_id = v.option AND voting = ? GROUP BY voting_opt_id, title ORDER BY votes",[$id]);
+$list = sql_select("SELECT voting_opt_id, title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.voting_opt_id = v.option WHERE voting = ? GROUP BY voting_opt_id, title ORDER BY votes",[$id]);
 
 echo "<h1>" . $voting["title"] . "</h1>";
 echo "<p>" . $voting["description"] . "</p>";
