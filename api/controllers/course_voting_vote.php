@@ -24,7 +24,7 @@ foreach($list as $row) {
             <?php }
             ?>
             <label class="form-check-label">
-                <?=$row["title"] . $voting["result"] != 0 ?: "(" . $row["votes"] . " votes)"?>
+                <?=$row["title"] . " " . ($voting["result"] != 0 ?: "(" . $row["votes"] . " votes)")?>
             </label>
         </div>
 
