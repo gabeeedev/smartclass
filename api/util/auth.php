@@ -48,39 +48,3 @@ function loginDie() {
         exit();
     }
 }
-
-// function setCurrentClass($id) {
-//     $row = sql_select_unique("SELECT * FROM teaches JOIN courses ON course=courseid WHERE user = ?",[$_SESSION["user"]["userid"]]);
-
-//     if(row !== false) {
-//         $_SESSION['current_class'] = [];
-//         $_SESSION["current_class"]['isTeacher'] = true;
-//         $_SESSION["current_class"]["courseid"] = $id;
-//         return true;
-//     }
-
-//     $row = sql_select_unique("SELECT * FROM subscribes JOIN courses ON course=courseid WHERE user = ?",[$_SESSION["user"]["userid"]]);
-
-//     if(row !== false) {
-//         $_SESSION['current_class'] = [];
-//         $_SESSION["current_class"]['isStudent'] = true;
-//         $_SESSION["current_class"]["courseid"] = $id;
-//         return true;
-//     }
-
-//     return false;
-// }
-
-// function isTeacher() {
-//     return isset($_SESSION) &&
-//     isset($_SESSION["current_class"]) &&
-//     isset($_SESSION["current_class"]["isTeacher"]) &&
-//     $_SESSION["current_class"]["isTeacher"];
-// }
-
-// function isStudent() {
-//     return isset($_SESSION) &&
-//     isset($_SESSION["current_class"]) &&
-//     isset($_SESSION["current_class"]["isStudent"]) &&
-//     $_SESSION["current_class"]["isStudent"];
-// }

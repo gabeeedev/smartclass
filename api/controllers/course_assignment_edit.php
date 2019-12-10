@@ -23,10 +23,12 @@ $content = "";
             <label for="assignmentTitle">Title</label>
             <input type="text" class="form-control" id="assignmentTitle" placeholder="Title" value=<?="'" . $title . "'"?>>
         </div>
-        <div class="form-group col-12 mt-4">
+
+        <?php include "../util/editor.html"; ?>
+        <!-- <div class="form-group col-12 mt-4">
             <label for="assignmentContent">Assignment</label>
             <textarea class="medium-editor-textarea editable h-25" id="assignmentContent"><?=$content?></textarea>
-        </div>
+        </div> -->
 
         <?php include "../util/timepicker.html"; ?>
 

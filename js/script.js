@@ -384,11 +384,45 @@ function votingEdit(e) {
         "votingAnswers": $("[name=votingAnswer]").map(function() {return $(this).val();}).get()
     };
 
-    console.log(data);
-
     $.post("api/services/course_voting_edit.php",data,function(data) {
-        console.log(data);
         loadController("course_voting_list","#content");
     });
 }
 handler("submit","#votingForm",votingEdit);
+
+function votingVote(e) {
+    e.preventDefault();
+
+    t = $("[name=votingChoice").map(function() {
+        return {
+            "id":$(this).attr("vote"),
+            "value":$(this).is(":checked")
+        };
+    });
+
+    data = {
+        "voting":$("#votingId").val(),
+        "votes":t.get()
+    };
+
+    // console.log(data);
+
+    $.post("api/services/course_voting_vote.php",data,function(data) {
+        // console.log(data);
+        loadController("course_voting_vote","#content",{id:$("#votingId").val()});
+    });
+}
+handler("submit","#votingVote",votingVote);
+
+function courseSettings(e) {
+    e.preventDefault();
+    data = {
+        "courseTitle": $("#courseTitle").val(),
+        "publicCourse":$("#publicCourse").is(":checked")
+    }
+    $.post("api/services/course_settings_edit.php",data,function(data) {
+        // console.log(data);
+        loadController("course_settings","#content");
+    });
+}
+handler("submit","#courseSettings",courseSettings);

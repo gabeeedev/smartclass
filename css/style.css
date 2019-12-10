@@ -229,3 +229,13 @@ input:focus {
     line-height: 24px;
     box-sizing: border-box;
 }
+
+.geditor
+{
+    height:auto;
+    min-height: 16rem;
+}
+
+.btn-editor {
+    min-width: 48px;
+}

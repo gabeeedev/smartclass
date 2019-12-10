@@ -1,4 +1,4 @@
-<div class="mb-2 col-12 text-center">
+<div class="mb-2 mt-4 col-6 text-center">
     <div class="btn-group" role="group">
         <button type="button" class="btn btn-primary datepicker-quick" datepicker-cmd="prev">-</button>
         <button type="button" class="btn btn-primary datepicker-quick" datepicker-cmd="day">This day</button>
@@ -8,13 +8,15 @@
         <button type="button" class="btn btn-primary datepicker-quick" datepicker-cmd="next">+</button>
     </div>
 </div>
+<div class="w-100"></div>
 <div class="form-group col-6">
     <label for="fromPicker">Available from</label>
-    <input type="text" class="form-control datetimepicker-input" id="fromPicker" data-toggle="datetimepicker" data-target="#fromPicker"/>
+    <input type="text" class="form-control datetimepicker-input" id="fromPicker" autocomplete="off" data-toggle="datetimepicker" data-target="#fromPicker"/>
 </div>
+<div class="w-100"></div>
 <div class="form-group col-6">
-    <label for="toPicker">Available to</label>
-    <input type="text" class="form-control datetimepicker-input" id="toPicker" data-toggle="datetimepicker" data-target="#toPicker"/>
+    <label for="toPicker">Available till</label>
+    <input type="text" class="form-control datetimepicker-input" id="toPicker" autocomplete="off" data-toggle="datetimepicker" data-target="#toPicker"/>
 </div>
 
 <script>

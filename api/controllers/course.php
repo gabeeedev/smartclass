@@ -50,7 +50,7 @@ if (isset($_SESSION["course"]["as"])) {
     <?php
     if (asTeacher()) {
         ?>
-        <div class="side-bar-item" redirect="debug" target="#content">
+        <div class="side-bar-item" redirect="course_settings" target="#content">
             <div class="side-bar-icon"><i class="material-icons">settings</i></div>
             <div class="side-bar-text">Settings</div>
         </div>
