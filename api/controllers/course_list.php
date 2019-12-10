@@ -47,13 +47,21 @@ loginRedirect();
 
         <div class="d-flex flex-wrap">        
             <?php
-                $data = sql_select("SELECT * FROM teaches JOIN courses ON course=courseid WHERE user = ?",[$_SESSION["user"]["userid"]]);
-                foreach ($data as $k => $v) {
+                $data = sql_select("SELECT * FROM teaches JOIN courses ON course=courseid WHERE user = ? ORDER BY status, courseid",[$_SESSION["user"]["userid"]]);
+                    
+                foreach ($data as $row) {
+
+                    $block_class = "block p-3";
+                    if($row["status"] == E_ARCHIVED)
+                        $block_class .= " archived";
+                    if($row["status"] == E_CLOSED)
+                        $block_class .= " closed";
+                        
                     ?>
                     <div class="f-box p-2">
-                        <div class="block p-3">
-                            <h2 class="clickable" <?="redirect='course' target='#page' options='course:" . $v["course"] . "'"?>><?=$v["title"]?></h2>
-                            <span><?=$v["token"]?></span>
+                        <div class="<?=$block_class?>">
+                            <h2 class="clickable" <?="redirect='course' target='#page' options='course:" . $row["course"] . "'"?>><?=$row["title"]?></h2>
+                            <span><?=$row["token"]?></span>
                         </div>
                     </div>
                         

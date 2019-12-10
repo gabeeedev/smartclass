@@ -418,6 +418,7 @@ function courseSettings(e) {
     e.preventDefault();
     data = {
         "courseTitle": $("#courseTitle").val(),
+        "courseStatus": $("#courseStatus").val(),
         "publicCourse":$("#publicCourse").is(":checked")
     }
     $.post("api/services/course_settings_edit.php",data,function(data) {
