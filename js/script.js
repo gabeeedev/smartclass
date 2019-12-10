@@ -408,7 +408,7 @@ function votingVote(e) {
     // console.log(data);
 
     $.post("api/services/course_voting_vote.php",data,function(data) {
-        // console.log(data);
+        console.log(data);
         loadController("course_voting_vote","#content",{id:$("#votingId").val()});
     });
 }
