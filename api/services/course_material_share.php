@@ -9,7 +9,7 @@ if (isset($_POST["materialShare"]) && asTeacher()) {
     $to = checkPostData(["toPicker"]) ? $_POST["toPicker"] : NULL;
     $material = $_POST["materialShare"];
 
-    sql_insert("material_shared",["material" => $material, "course" => $_SESSION["course"]["id"],"available_from" => $from, "available_to" => $to]);
+    sql_insert("material_shared",["material" => $material, "course" => $_SESSION["course"]["id"],"availableFrom" => $from, "availableTo" => $to]);
 }
 
 echo $_SESSION["course"]["id"];

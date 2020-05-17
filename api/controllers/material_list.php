@@ -3,7 +3,7 @@ require_once "../util/auth.php";
 require_once "../util/util.php";
 
 loginRedirect();
-$materials = sql_select("SELECT * FROM materials WHERE author = ? ORDER BY status, materialid DESC",[$_SESSION["user"]["userid"]]);
+$materials = sql_select("SELECT * FROM materials WHERE author = ? ORDER BY status, materialId DESC",[$_SESSION["user"]["userId"]]);
 ?>
 <div class="w-100 p-2 icon-48">
     <i class="material-icons cursor-pointer list-changer" list-to="f-box">
@@ -19,7 +19,7 @@ $materials = sql_select("SELECT * FROM materials WHERE author = ? ORDER BY statu
 <div class="w-100 d-flex flex-wrap list-changeable" list-style="f-box">
 
     <div class="f-box p-2">
-        <div class="block clickable p-3 rounded d-flex flex-row" redirect="material_edit" target="#content">
+        <div class="block clickable p-3 rounded d-flex flex-row" content="material_edit">
             <div class="font-weight-bold flex-max mr-4">Add new material</div>
             <i class="material-icons flex-static mx-1">add_circle</i>
         </div>
@@ -35,12 +35,12 @@ $materials = sql_select("SELECT * FROM materials WHERE author = ? ORDER BY statu
                         $block_class .= " archived";
                 ?>
                 <div class=<?='"' . $block_class . '"'?> >
-                    <div class="font-weight-bold clickable flex-max mr-4" redirect="material" target="#content" options=<?="id:" . $row["materialid"]?>>
+                    <div class="font-weight-bold clickable flex-max mr-4" content="material" contentOptions=<?="id:" . $row["materialId"]?>>
                         <?=$row["title"]?>
                     </div>
-                    <i class="material-icons flex-static mx-1 clickable" redirect="material_edit" target="#content" options=<?="edit:" . $row["materialid"]?>>edit</i>
-                    <i class="material-icons flex-static mx-1 clickable">archive</i>
-                    <i class="material-icons flex-static mx-1 clickable">delete</i>
+                    <i class="material-icons flex-static mx-1 clickable" content="material_edit" contentOptions=<?="edit:" . $row["materialId"]?>>edit</i>
+                    <i class="material-icons flex-static mx-1 clickable" archive_popup="<?=$row["title"]?>" archive_service="material_archive" archive_id="<?=$row["materialId"]?>">archive</i>
+                    <i class="material-icons flex-static mx-1 clickable" delete_popup="<?=$row["title"]?>" delete_service="material_delete" delete_id="<?=$row["materialId"]?>">delete</i>
                 </div>
             </div>
                 

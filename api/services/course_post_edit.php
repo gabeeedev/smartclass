@@ -4,11 +4,9 @@ require_once "../util/util.php";
 
 loginRedirect();
 
-if (isset($_POST["postContent"])) {
+if (checkPostData(["postContent"])) {
     $post = $_POST["postContent"];
 
-    $t = sql_insert("posts",["content" => $post, "course" => $_SESSION["course"]["id"],"user" => $_SESSION["user"]["userid"]]);
-    echo $t;
+    $t = sql_insert("posts",["content" => $post, "course" => $_SESSION["course"]["id"],"user" => $_SESSION["user"]["userId"]]);
+    echo "1";
 }
-
-echo $_SESSION["course"]["id"];

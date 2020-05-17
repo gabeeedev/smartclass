@@ -39,7 +39,7 @@ body, html {
 }
 
 .side-bar-title {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
     /* line-height: 48px;
     height: 48px;
@@ -109,10 +109,6 @@ body, html {
     display:flex;
     align-items:center;
     justify-content: center;
-}
-
-input:focus {
-    box-shadow: none !important;
 }
 
 .center-link {
@@ -197,7 +193,6 @@ input:focus {
     flex-basis:33%;
 }
 
-
 @media(max-width:1000px) {
     .f-box {
         flex-basis: 50%;
@@ -207,6 +202,20 @@ input:focus {
 @media(max-width:600px) {
     .f-box {
         flex-basis: 100%;
+    }
+}
+
+.w-resp {
+    width: 40%;
+}
+@media(max-width:1199px) {
+    .w-resp {
+        width:70%;
+    }
+}
+@media(max-width:799px) {
+    .w-resp {
+        width:100%;
     }
 }
 
@@ -238,4 +247,67 @@ input:focus {
 
 .btn-editor {
     min-width: 48px;
+}
+
+.border-test {
+    border-left:solid 8px;
+}
+
+.test-header {
+    display:flex;
+    height: 32px;
+    font-size: 16px;
+    line-height: 32px;
+    vertical-align: middle;
+}
+[test_log] {
+    display:none;
+}
+
+.popup-center {
+    position: fixed;
+    left:0px;
+    top:0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(20, 20, 20, 0.5);
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.popup-window {
+    width: 512px;
+    height: 256px;
+    display:flex;
+    flex-direction: column;
+}
+
+.question-editor-menu {
+    position: fixed;
+    right:0px;
+    top:256px;
+    width:64px;
+    height: 256px;
+    background-color: blueviolet;    
+}
+
+.badge {
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.fw1 {
+    width:100px;
+}
+
+.col-main {
+    display: flex;
+    flex-direction: column;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.datepicker-quick {
+    min-width: 64px;
 }

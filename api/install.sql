@@ -23,8 +23,8 @@ USE `database` ;
 CREATE TABLE IF NOT EXISTS `database`.`assigments` (
   `assigmentid` INT NOT NULL,
   `content` VARCHAR(10000) NULL,
-  `available_from` TIMESTAMP NULL,
-  `available_to` TIMESTAMP NULL,
+  `availableFrom` TIMESTAMP NULL,
+  `availableTo` TIMESTAMP NULL,
   `extenstions` VARCHAR(100) NULL,
   `rename` VARCHAR(50) NULL,
   `course` INT NOT NULL,
@@ -57,12 +57,12 @@ ENGINE = InnoDB;
 -- Table `database`.`comments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`comments` (
-  `commentid` INT NOT NULL AUTO_INCREMENT,
+  `commentId` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(2000) NULL,
   `postDate` TIMESTAMP NULL,
   `post` INT NOT NULL,
   `user` INT NOT NULL,
-  PRIMARY KEY (`commentid`, `post`, `user`))
+  PRIMARY KEY (`commentId`, `post`, `user`))
 ENGINE = InnoDB;
 
 
@@ -70,14 +70,14 @@ ENGINE = InnoDB;
 -- Table `database`.`courses`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`courses` (
-  `courseid` INT NOT NULL AUTO_INCREMENT,
+  `courseId` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(128) NULL,
   `token` VARCHAR(7) NULL,
   `isPublic` TINYINT NULL,
   `modified` TIMESTAMP NULL,
   `status` ENUM('OPEN', 'CLOSED', 'ARCHIVED') NULL,
   `settings` INT NOT NULL,
-  PRIMARY KEY (`courseid`, `settings`))
+  PRIMARY KEY (`courseId`, `settings`))
 ENGINE = InnoDB;
 
 
@@ -85,12 +85,12 @@ ENGINE = InnoDB;
 -- Table `database`.`grades`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`grades` (
-  `gradeid` INT NOT NULL AUTO_INCREMENT,
+  `gradeId` INT NOT NULL AUTO_INCREMENT,
   `grade` INT NULL,
   `comment` VARCHAR(500) NULL,
   `grading` INT NOT NULL,
   `user` INT NOT NULL,
-  PRIMARY KEY (`gradeid`, `user`, `grading`))
+  PRIMARY KEY (`gradeId`, `user`, `grading`))
 ENGINE = InnoDB;
 
 
@@ -98,13 +98,13 @@ ENGINE = InnoDB;
 -- Table `database`.`gradings`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`gradings` (
-  `gradingid` INT NOT NULL,
+  `gradingId` INT NOT NULL,
   `title` VARCHAR(200) NULL,
   `min` INT NULL,
   `max` INT NULL,
   `gradingDate` TIMESTAMP NULL,
   `course` INT NOT NULL,
-  PRIMARY KEY (`gradingid`, `course`))
+  PRIMARY KEY (`gradingId`, `course`))
 ENGINE = InnoDB;
 
 
@@ -145,13 +145,13 @@ ENGINE = InnoDB;
 -- Table `database`.`materials`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`materials` (
-  `materialid` INT NOT NULL AUTO_INCREMENT,
+  `materialId` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(128) NULL,
   `content` VARCHAR(10000) NULL,
-  `available_from` TIMESTAMP NULL,
-  `available_to` TIMESTAMP NULL,
+  `availableFrom` TIMESTAMP NULL,
+  `availableTo` TIMESTAMP NULL,
   `author` INT NOT NULL,
-  PRIMARY KEY (`materialid`, `author`))
+  PRIMARY KEY (`materialId`, `author`))
 ENGINE = InnoDB;
 
 
@@ -159,12 +159,12 @@ ENGINE = InnoDB;
 -- Table `database`.`posts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`posts` (
-  `postid` INT NOT NULL AUTO_INCREMENT,
+  `postId` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(45) NULL,
   `postDate` TIMESTAMP NULL,
   `course` INT NOT NULL,
   `user` INT NOT NULL,
-  PRIMARY KEY (`postid`, `course`, `user`))
+  PRIMARY KEY (`postId`, `course`, `user`))
 ENGINE = InnoDB;
 
 
@@ -203,9 +203,9 @@ ENGINE = InnoDB;
 -- Table `database`.`user_role`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`user_role` (
-  `users_userid` INT NOT NULL,
+  `users_userId` INT NOT NULL,
   `roles_roleid` INT NOT NULL,
-  PRIMARY KEY (`users_userid`, `roles_roleid`))
+  PRIMARY KEY (`users_userId`, `roles_roleid`))
 ENGINE = InnoDB;
 
 
@@ -224,14 +224,14 @@ ENGINE = InnoDB;
 -- Table `database`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`users` (
-  `userid` INT NOT NULL AUTO_INCREMENT,
+  `userId` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(128) NULL,
   `password` VARCHAR(128) NULL,
   `email` VARCHAR(128) NULL,
   `name` VARCHAR(128) NULL,
   `regDate` TIMESTAMP NULL,
   `settings` INT NOT NULL,
-  PRIMARY KEY (`userid`, `settings`))
+  PRIMARY KEY (`userId`, `settings`))
 ENGINE = InnoDB;
 
 
@@ -249,17 +249,17 @@ ENGINE = InnoDB;
 -- Table `database`.`voting`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`voting` (
-  `voting_id` INT NOT NULL AUTO_INCREMENT,
+  `votingId` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NULL,
   `description` VARCHAR(2000) NULL,
   `can_add_custom` TINYINT NULL,
-  `available_from` TIMESTAMP NULL,
-  `available_to` TIMESTAMP NULL,
+  `availableFrom` TIMESTAMP NULL,
+  `availableTo` TIMESTAMP NULL,
   `multiple` TINYINT NULL,
   `anonymous` TINYINT NULL,
   `result` ENUM("ALWAYS", "AFTER", "NEVER") NULL,
   `course` INT NOT NULL,
-  PRIMARY KEY (`voting_id`, `course`))
+  PRIMARY KEY (`votingId`, `course`))
 ENGINE = InnoDB;
 
 
@@ -267,10 +267,10 @@ ENGINE = InnoDB;
 -- Table `database`.`voting_options`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database`.`voting_options` (
-  `voting_opt_id` INT NOT NULL,
+  `votingOptionId` INT NOT NULL,
   `title` VARCHAR(128) NULL,
   `voting` INT NOT NULL,
-  PRIMARY KEY (`voting_opt_id`, `voting`))
+  PRIMARY KEY (`votingOptionId`, `voting`))
 ENGINE = InnoDB;
 
 

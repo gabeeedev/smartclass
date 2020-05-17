@@ -8,7 +8,7 @@ loginRedirect();
 $id = $_GET["id"];
 $course = $_SESSION["course"]["id"];
 
-$grading = sql_select_unique("SELECT * FROM gradings WHERE gradingid = ?",[$id]);
+$grading = sql_select_unique("SELECT * FROM gradings WHERE gradingId = ?",[$id]);
 if ($grading === false) {
     exit();
 }
@@ -16,7 +16,7 @@ if ($grading === false) {
 if (asTeacher()) {
 
     // $grades = sql_select("SELECT a.user, g.grade, g.comment FROM attends a LEFT JOIN grades g ON a.user = g.user WHERE a.course = ? AND g.grading = ?",[$course,$id]);
-    $grades = sql_select("SELECT a.userid, a.name, g.grade, g.comment, g.grading FROM (SELECT * FROM users, attends WHERE users.userid = attends.user) a LEFT JOIN (SELECT * FROM grades WHERE grading = ?) g ON a.user = g.user WHERE a.course = ?",[$id,$course]);
+    $grades = sql_select("SELECT a.userId, a.name, g.grade, g.comment, g.grading FROM (SELECT * FROM users, attends WHERE users.userId = attends.user) a LEFT JOIN (SELECT * FROM grades WHERE grading = ?) g ON a.user = g.user WHERE a.course = ?",[$id,$course]);
     echo "<input type='hidden' id='gradingId' value='$id'>";
     ?>
         <table class="table">
@@ -30,10 +30,10 @@ if (asTeacher()) {
         <tbody>
             <?php
                 foreach ($grades as $row) {
-                    echo "<tr uid='" . $row["userid"] . "'>";
+                    echo "<tr uid='" . $row["userId"] . "'>";
                     echo "<td>" . $row["name"] . "</td>";
-                    echo "<td><input type='number' data='gradeGrade'  value='".$row["grade"] . "'></td>";
-                    echo "<td><input type='text' data='gradeComment' value='".$row["comment"] . "'></td>";
+                    echo "<td><input type='number' data='gradeGrade' class='form-control w-resp' value='".$row["grade"] . "'></td>";
+                    echo "<td><input type='text' data='gradeComment' class='form-control w-resp' value='".$row["comment"] . "'></td>";
                     echo "</tr>";
                 }
             ?>
@@ -46,10 +46,10 @@ if (asTeacher()) {
     <?php
 } else {
 
-    if ($grading["public_scores"] > 0) {
-        $grades = sql_select("SELECT u.name, g.comment, g.grade FROM grades g, users u WHERE g.user = u.userid AND g.grading = ? ORDER BY u.name",[$id]);
+    if ($grading["publicScores"] > 0) {
+        $grades = sql_select("SELECT u.name, g.comment, g.grade FROM grades g, users u WHERE g.user = u.userId AND g.grading = ? ORDER BY u.name",[$id]);
     } else {
-        $grades = sql_select("SELECT u.name, g.comment, g.grade FROM grades g, users u WHERE g.user = u.userid AND g.grading = ? AND u.userid = ?",[$id,$_SESSION["user"]["userid"]]);
+        $grades = sql_select("SELECT u.name, g.comment, g.grade FROM grades g, users u WHERE g.user = u.userId AND g.grading = ? AND u.userId = ?",[$id,$_SESSION["user"]["userId"]]);
     }
 
     ?>

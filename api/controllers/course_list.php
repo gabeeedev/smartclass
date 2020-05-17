@@ -4,7 +4,7 @@ require_once "../util/util.php";
 
 loginRedirect();
 ?>
-<div class="d-flex flex-col">
+<div class="d-flex flex-row">
     <div class="column">
         <h1>Attending</h1>
         <form id="joinCourse">
@@ -19,13 +19,18 @@ loginRedirect();
 
         <div class="course-list">        
             <?php
-                $data = sql_select("SELECT * FROM attends JOIN courses ON course=courseid WHERE user = ?",[$_SESSION["user"]["userid"]]);
-                foreach ($data as $k => $v) {
+                $data = sql_select("SELECT * FROM attends JOIN courses ON course=courseId WHERE user = ? AND status < 2 ORDER BY status",[$_SESSION["user"]["userId"]]);
+                foreach ($data as $row) {
+
+                    $block_class = "block p-3";
+                    if($row["status"] == E_ARCHIVED)
+                        $block_class .= " archived";
+
                     ?>
-                    <div class="f-box p-2">
-                        <div class="block p-3">
-                            <h2 class="clickable" <?="redirect='course' target='#page' options='course:" . $v["course"] . "'"?>><?=$v["title"]?></h2>
-                            <span><?=$v["token"]?></span>
+                    <div class="f-row p-2">
+                        <div class="<?=$block_class?>">
+                            <h2 class="clickable" <?="page='course' pageOptions='course:" . $row["course"] . "' sub='course_home'"?>><?=$row["title"]?></h2>
+                            <span><?=$row["token"]?></span>
                         </div>
                     </div>
                     <?php
@@ -47,7 +52,7 @@ loginRedirect();
 
         <div class="d-flex flex-wrap">        
             <?php
-                $data = sql_select("SELECT * FROM teaches JOIN courses ON course=courseid WHERE user = ? ORDER BY status, courseid",[$_SESSION["user"]["userid"]]);
+                $data = sql_select("SELECT * FROM teaches JOIN courses ON course=courseId WHERE user = ? ORDER BY status, courseId",[$_SESSION["user"]["userId"]]);
                     
                 foreach ($data as $row) {
 
@@ -58,9 +63,9 @@ loginRedirect();
                         $block_class .= " closed";
                         
                     ?>
-                    <div class="f-box p-2">
+                    <div class="f-row p-2">
                         <div class="<?=$block_class?>">
-                            <h2 class="clickable" <?="redirect='course' target='#page' options='course:" . $row["course"] . "'"?>><?=$row["title"]?></h2>
+                            <h2 class="clickable" <?="page='course' pageOptions='course:" . $row["course"] . "' sub='course_home'"?>><?=$row["title"]?></h2>
                             <span><?=$row["token"]?></span>
                         </div>
                     </div>

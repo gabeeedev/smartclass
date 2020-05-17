@@ -1,6 +1,7 @@
 <?php
 require_once "../util/course.php";
 require_once "../util/util.php";
+require_once "../util/timepicker.php";
 
 loginRedirect();
 
@@ -8,24 +9,21 @@ if (!asTeacher()) {
     exit();
 }
 
-$title = "";
-$description = "";
-
 ?>
 
 <h2>New voting</h2>
 <form id="votingForm">
-    <div class="row">    
+    <div class="col-main">    
         <div class="form-group col-12">
             <label for="votingTitle">Title</label>
-            <input type="text" class="form-control" id="votingTitle" placeholder="Title" value=<?="'" . $title . "'"?>>
+            <input type="text" class="form-control" id="votingTitle" placeholder="Title">
         </div>
         <div class="form-group col-12 mt-4">
             <label for="votingDescription">Description</label>
-            <textarea class="form-control" id="votingDescription" placeholder="Description"><?=$description?></textarea>
-        </div>
-        
-        <?php include "../util/timepicker.html"; ?>
+            <textarea class="form-control" id="votingDescription" placeholder="Description"></textarea>
+        </div>        
+       
+        <?php generateTimePicker(); ?>
 
         <div class="col-12">
             <h4>Answers</h4>

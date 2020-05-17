@@ -6,13 +6,13 @@ require_once "../util/util.php";
 loginRedirect();
 
 $id = $_GET["id"];
-$voting = sql_select_unique("SELECT * FROM voting WHERE voting_id = ?",[$id]);
+$voting = sql_select_unique("SELECT * FROM votings WHERE votingId = ?",[$id]);
 
 echo "<h1>" . $voting["title"] . "</h1>";
 echo "<p>" . $voting["description"] . "</p>";
 
 if (asTeacher()) {
-    $list = sql_select("SELECT vo.voting_opt_id, vo.title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.voting_opt_id = v.option WHERE voting = ? GROUP BY vo.voting_opt_id, vo.title ORDER BY votes DESC",[$id]);
+    $list = sql_select("SELECT vo.votingOptionId, vo.title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.votingOptionId = v.option WHERE voting = ? GROUP BY vo.votingOptionId, vo.title ORDER BY votes DESC, title",[$id]);
     echo "<div class='row'>";
     foreach($list as $row) {
         ?>
@@ -27,18 +27,18 @@ if (asTeacher()) {
     
     
     // if ($voting["anonymous"] == 0) {
-    //     $list = sql_select("SELECT * FROM voting_options vo, votes v, users u WHERE v.user = u.userid AND vo.voting = ? AND vo.voting_opt_id = v.option",[$id]);
+    //     $list = sql_select("SELECT * FROM voting_options vo, votes v, users u WHERE v.user = u.userId AND vo.voting = ? AND vo.votingOptionId = v.option",[$id]);
 
         
         
     // }
 
 } else {
-    $t = sql_select_unique("SELECT COUNT(*) c FROM votes v, voting_options vo WHERE v.user = ? AND v.option = vo.voting_opt_id AND vo.voting = ?",[$_SESSION["user"]["userid"],$id]);
+    $t = sql_select_unique("SELECT COUNT(*) c FROM votes v, voting_options vo WHERE v.user = ? AND v.option = vo.votingOptionId AND vo.voting = ?",[$_SESSION["user"]["userId"],$id]);
 
     if ($t["c"] == 0) {
 
-        $list = sql_select("SELECT vo.voting_opt_id, vo.title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.voting_opt_id = v.option WHERE voting = ? GROUP BY vo.voting_opt_id, vo.title",[$id]);
+        $list = sql_select("SELECT vo.votingOptionId, vo.title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.votingOptionId = v.option WHERE voting = ? GROUP BY vo.votingOptionId, vo.title",[$id]);
         
         echo "<form id='votingVote'><div class='row'>";
         echo "<input type='hidden' id='votingId' value='$id'>";
@@ -47,9 +47,9 @@ if (asTeacher()) {
                 <div class="form-check col-12 mb-4">
                     <?php
                     if ($voting["multiple"]) { ?>
-                        <input type="checkbox" value="" name="votingChoice" vote=<?=$row["voting_opt_id"]?>>
+                        <input type="checkbox" value="" name="votingChoice" vote=<?=$row["votingOptionId"]?>>
                     <?php } else { ?>
-                        <input type="radio" value="" name="votingChoice" vote=<?=$row["voting_opt_id"]?>>
+                        <input type="radio" value="" name="votingChoice" vote=<?=$row["votingOptionId"]?>>
                     <?php }
                     ?>
                     <label class="form-check-label">
@@ -73,7 +73,7 @@ if (asTeacher()) {
         
         if ($voting["result"] != 0) {            
             
-            $list = sql_select("SELECT vo.voting_opt_id, vo.title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.voting_opt_id = v.option WHERE voting = ? GROUP BY vo.voting_opt_id, vo.title ORDER BY votes DESC",[$id]);
+            $list = sql_select("SELECT vo.votingOptionId, vo.title, COUNT(user) votes FROM voting_options vo LEFT JOIN votes v ON vo.votingOptionId = v.option WHERE voting = ? GROUP BY vo.votingOptionId, vo.title ORDER BY votes DESC",[$id]);
             echo "<div class='row'>";
             foreach($list as $row) {
                 ?>

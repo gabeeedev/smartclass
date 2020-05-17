@@ -1,7 +1,7 @@
 <?php
 
-include "../util/util.php";
-include "../util/auth.php";
+require_once "../util/util.php";
+require_once "../util/auth.php";
 
 if (checkPostData(["registerUsername", "registerEmail", "registerName", "registerPassword", "registerRepeatPassword"])) {
     $username = $_POST["registerUsername"];
@@ -27,27 +27,13 @@ if (checkPostData(["registerUsername", "registerEmail", "registerName", "registe
 
         $password = makePassword($password);
 
-        $settings = sql_insert("user_settings",[
-            "language"=>1,
-            "theme"=>1
-        ]);
-
         $id = sql_insert("users",[
             "username"=>$username,
             "email"=>$email,
             "name"=>$name,
             "password"=>$password,      
-            "settings"=>$settings  
         ]);
-
         
-
-        // $account = sql_select_unique("SELECT userid,username,name FROM users WHERE username = ?",[$username]);
-
-        // $con->lastInsertId();
-
-        // $_SESSION['login'] = $account[0];
-
         login($id);
 
         echo "1";

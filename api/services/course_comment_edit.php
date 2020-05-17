@@ -4,10 +4,11 @@ require_once "../util/util.php";
 
 loginRedirect();
 
-if (isset($_POST["commentContent"])) {
+if (checkPostData(["commentContent","postId"])) {
     $content = $_POST["commentContent"];
     $post = $_POST["postId"];
-    $user = $_SESSION["user"]["userid"];
+    $user = $_SESSION["user"]["userId"];
 
     $t = sql_insert("comments",["content" => $content, "post" => $post,"user" => $user]);
+    echo "1";
 }

@@ -27,7 +27,7 @@ loginRedirect();
 
 <?php
 
-    $posts = sql_select("SELECT u.name, p.postDate, p.content, p.postid FROM posts p, users u WHERE p.user = u.userid AND p.course = ? ORDER BY p.postDate DESC",[$_SESSION["course"]["id"]]);
+    $posts = sql_select("SELECT u.name, p.postDate, p.content, p.postId FROM posts p, users u WHERE p.user = u.userId AND p.course = ? ORDER BY p.postDate DESC",[$_SESSION["course"]["id"]]);
 
     foreach($posts as $row) {
         ?>
@@ -44,16 +44,16 @@ loginRedirect();
                 <div class="d-flex">
                     <?=$row["content"]?>
                 </div>                
-                <form class="commentForm" postId="<?=$row["postid"]?>">
+                <form class="commentForm" postId="<?=$row["postId"]?>">
                     <div class="d-flex flex-row mt-4">
                         <div class="d-flex w-100 pr-2">
-                            <textarea class="comment w-100 resize-textarea"></textarea>
+                            <textarea class="comment w-100 resize-textarea" placeholder="Comment"></textarea>
                         </div>
                         <div><button type="submit" class="btn btn-primary ml-auto">Comment</button></div>
                     </div>
                 </form>
                 <?php
-                    $comments = sql_select("SELECT u.name, c.postDate, c.content FROM comments c, users u WHERE c.user = u.userid AND c.post = ? ORDER BY c.postDate DESC",[$row["postid"]]);
+                    $comments = sql_select("SELECT u.name, c.postDate, c.content FROM comments c, users u WHERE c.user = u.userId AND c.post = ? ORDER BY c.postDate",[$row["postId"]]);
                     foreach ($comments as $com) {
                         ?>
                             <div class="mt-4">

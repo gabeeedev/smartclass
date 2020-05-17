@@ -8,7 +8,7 @@ loginRedirect();
 $assignmentId = $_GET["id"];
 
 if (asTeacher()) {
-    $files = sql_select("SELECT af.file, u.name FROM assignment_files af, users u WHERE af.user = u.userid AND assignment = ?",[$assignmentId]);
+    $files = sql_select("SELECT af.aFileId, af.filePath, u.name FROM assignment_files af, users u WHERE af.user = u.userId AND assignment = ?",[$assignmentId]);
 
     ?>    
         <div class="p-4">
@@ -20,34 +20,27 @@ if (asTeacher()) {
                     </tr>
                 </thead>  
                 <tbody>
-    <?php
-    foreach ($files as $row) {
-        ?>
-            <tr>
-                <td><?=$row["name"]?></td>
-                <td>
-                    <a href="<?="api/files/assignments/" . $row["file"]?>" download >Download</a>     
-                </td>
-            </tr>
-        <?php
-
-    }
-    ?>
+                <?php foreach ($files as $row) { ?>
+                    <tr>
+                        <td><?=$row["name"]?></td>
+                        <td>
+                            <button downloader="course_assignment_solution_download" class="btn btn-primary" id="<?=$row["aFileId"]?>">Download</button>     
+                        </td>
+                    </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
     <?php
-
-} else {
-    ?>
+}
 
 
 
-    <?php
-// }
+    $row = sql_select_unique("SELECT * FROM assignments WHERE assignmentId = ?",[$assignmentId]);
+    $solution = sql_select_unique("SELECT * FROM assignment_files WHERE assignment = ? AND user = ?",[$assignmentId,$_SESSION["user"]["userId"]]);
 
-    $row = sql_select_unique("SELECT * FROM assignments WHERE assignmentid = ?",[$assignmentId]);
-    $solution = sql_select_unique("SELECT * FROM assignment_files WHERE assignment = ? AND user = ?",[$assignmentId,$_SESSION["user"]["userid"]]);
+    if (asStudent()) {
+    
 
     ?>  
         <div class="p-4">
@@ -55,7 +48,7 @@ if (asTeacher()) {
             <?php
                 if ($solution !== false) {
                     ?> 
-                        <a href="<?="api/files/assignments/" . $solution["file"]?>" download class="badge badge-primary p-2">Last solution</a> 
+                        <a href="<?="files/assignments/" . $solution["filePath"]?>" download class="badge badge-primary p-2">Last solution</a> 
                     <?php
                 }
             ?>
@@ -65,14 +58,22 @@ if (asTeacher()) {
                     <input type="file" class="custom-file-input" id="assignmentSolution" name="assignmentSolution">
                     <label class="custom-file-label" for="assignmentSolution">Choose file</label>
                 </div>
+                <div class="mb-2">Available extensions: 
+                    <?php
+                        foreach(explode(",",$row["extensions"]) as $ext) {
+                            echo "<span class='badge badge-primary'>$ext</span>";
+                        }
+                    ?>
+                </div>
 
                 <button type="submit" class="btn btn-primary">Upload</button>
             </form>
         </div>
 
+        <?php } ?>
+
+        <hr>
         <div class="p-4">
             <h2><?=$row["title"]?></h2>
             <div class="my-4"><?=$row["content"]?></div>
         </div>
-    <?php
-    }

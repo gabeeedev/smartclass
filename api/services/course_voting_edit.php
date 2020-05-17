@@ -5,11 +5,11 @@ require_once "../util/util.php";
 
 loginRedirect();
 if (checkPostData(["votingTitle","votingDescription","votingFrom","votingTo","votingAnswers"]) && asTeacher()) {
-    $id = sql_insert("voting",[
+    $id = sql_insert("votings",[
         "title" => $_POST["votingTitle"],
         "description" => $_POST["votingDescription"],
-        "available_from" => $_POST["votingFrom"],
-        "available_to" => $_POST["votingTo"],
+        "availableFrom" => $_POST["votingFrom"],
+        "availableTo" => $_POST["votingTo"],
         "multiple" => (isset($_POST["votingMultiple"]) && $_POST["votingMultiple"] == "true") ? 1 : 0,
         "anonymous" => (isset($_POST["votingAnonymous"]) && $_POST["votingAnonymous"] == "true") ? 1 : 0,
         "result" => (isset($_POST["votingResult"]) && $_POST["votingResult"] == "true") ? 1 : 0,
@@ -23,4 +23,5 @@ if (checkPostData(["votingTitle","votingDescription","votingFrom","votingTo","vo
     }
 
     sql_multiple_insert("voting_options",["title","voting"],$data);
+    echo "1";
 }

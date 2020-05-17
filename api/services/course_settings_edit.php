@@ -10,5 +10,5 @@ if (checkPostData(["courseTitle","publicCourse","courseId"]) && asTeacher()) {
         "isPublic" => $_POST["publicCourse"] == "true" ? 1 : 0,
         "status" => intval($_POST["courseStatus"])
     ];
-    sql_update_by_id("courses",$data,"courseid",$_SESSION["course"]["id"]);
+    sql_update_by_id("courses",$data,"courseId",$_SESSION["course"]["id"]);
 }

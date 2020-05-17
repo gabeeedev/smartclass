@@ -7,3 +7,4 @@ loginRedirect();
 
 debug($_SESSION);
 
+?>

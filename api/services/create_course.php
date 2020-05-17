@@ -10,17 +10,21 @@ $data = [];
 
 if(isset($_POST["courseName"]) && strlen($_POST["courseName"]) >= 3) {
     $token = generateToken(7);
+
+    // $cset = sql_insert("course_settings", [
+    //     "default_assignment" => -1,
+    //     "default_grading" => -1
+    // ]);
     
     $cid = sql_insert("courses",[
         "title" => $_POST["courseName"],
         "token" => $token,
-        "status" => "OPEN",
-        "isPublic" => false
-        // "modified" => "CURRENT_TIMESTAMP"
+        "status" => "OPEN"
+        // "settings" => $cset
     ]);
 
     sql_insert("teaches",[
-        "user" => $_SESSION["user"]["userid"],
+        "user" => $_SESSION["user"]["userId"],
         "course" => $cid
     ]);
 

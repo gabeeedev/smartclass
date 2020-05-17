@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/tempusdominus.css">
     <!-- <link rel="stylesheet" href="css/bootstrap-select.min.css"> -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/themes/light.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <title>SClass</title>
 </head>
@@ -18,13 +18,37 @@
     <div id="page">
 
     </div>
+    <div class="popup-center">
+        <div class="popup-window">
+            <div class="popup-header"></div>
+            <div class="popup-text"></div>
+            <div class="popup-bot">
+                <button class="btn btn-secondary popup-cancel">Cancel</button>
+                <button class="btn btn-normal popup-btn">Yes</button>
+            </div>
+        </div>
+    </div>
     
 </body>
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/moment.js"></script>
+<script src="js/moment-duration-format.js"></script>
 <script src="js/tempusdominus.js"></script>
 <!-- <script src="js/bootstrap-select.min.js"></script> -->
-<script src="js/script.js"></script>
+<script src="js/script_global.js"></script>
+<script src="js/script_util.js"></script>
+<script src="js/script_misc.js"></script>
+<script src="js/script_spec.js"></script>
+<script src="js/script_services.js"></script>
+<script>
+    // $(document).ready(function() {
+    //     // window.onpopstate = stateHandler;
+    //     // state = window.history.state;
+    //     // load(state.page,state.target,state.options,false);
+        // loadPage("index",{},"main_home",{});
+    // });
+    $(".popup-center").hide();
+</script>
 </html>

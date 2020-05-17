@@ -126,13 +126,18 @@ body {
 }
 
 .archived {
-    border:2px solid rgb(153, 29, 29);
+    /* border:2px solid rgb(153, 29, 29);
     border-left: 8px solid rgb(153, 29, 29);
-    background-color:rgb(204, 188, 185)
+    background-color:rgb(204, 188, 185) */
+    border:2px solid rgb(37, 62, 110);
+    border-left: 8px solid rgb(37, 62, 110);
+    background-color:rgb(141, 167, 214);
 }
 .archived .clickable:hover {
-    color:rgb(153, 29, 29);
-    text-shadow: 0px 0px 4px rgb(255, 148, 148)
+    /* color:rgb(153, 29, 29);
+    text-shadow: 0px 0px 4px rgb(255, 148, 148) */
+    color:rgb(37, 62, 110);
+    text-shadow: 0px 0px 4px rgb(61, 101, 175);
 }
 
 .closed {
@@ -143,6 +148,13 @@ body {
 .closed .clickable:hover {
     color:rgb(27, 27, 27);
     text-shadow: 0px 0px 4px rgb(58, 55, 55);
+}
+
+.unavailable {
+    background-color:#D9D9D9;
+    border:2px solid rgb(62, 111, 139);
+    border-left: 8px solid rgb(62, 111, 139);
+    color:#666;
 }
 
 .editable {
@@ -169,4 +181,70 @@ body {
 
 .btn-normal {
     background-color:rgb(36, 137, 196);
+    border:solid 1px rgb(36, 128, 182);
+    color:#EEE;
+}
+
+.btn-normal:hover {
+    background-color:rgb(29, 122, 175);
+    border:solid 1px rgb(20, 106, 155);
+    color:#FFF;
+}
+
+.comment {
+    background-color:#EEE;
+    border-radius:8px;
+    padding:8px;
+}
+
+input:focus, .form-control:focus {
+    box-shadow: none !important;
+}
+
+.popup-header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: rgb(32, 44, 51);
+    color:#DDD;
+    height: 40px;
+    line-height: 24px;
+    font-weight: bold;
+    padding:8px;
+    vertical-align: middle;
+}
+.popup-text {
+    border-left: solid 2px;
+    border-right: solid 2px;
+    border-color: rgb(32, 44, 51);;
+    background-color:#DDD;
+    padding:4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+.popup-bot {
+    display:flex;
+    justify-content: center;
+    height: 48px;
+    padding:4px;    
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color:#DDD;
+
+    border-left: solid 2px;
+    border-right: solid 2px;
+    border-bottom: solid 2px;
+    border-color: rgb(32, 44, 51);
+}
+.popup-bot .btn {
+    min-width: 128px;
+    margin: 0px 8px;
+}
+
+.btn:focus {
+    box-shadow: none !important;
 }

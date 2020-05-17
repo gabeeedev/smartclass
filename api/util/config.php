@@ -1,5 +1,6 @@
 <?php
 
+
 $mysqlAddress = 'localhost';
 $mysqlUsername = 'root';
 $mysqlPassword = '';
@@ -10,3 +11,5 @@ $adminEmail = 'sfdsf';
 $adminPassword = 'dsfds';
 $adminName = 'fdsfsd';
 $install = 'true';
+
+$testMode = true;

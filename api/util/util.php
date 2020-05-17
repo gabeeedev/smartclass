@@ -4,29 +4,29 @@ require_once "constants.php";
 
 function checkPostData($fields) {
     foreach($fields as $v) {
-        if(isset($_POST[$v]) && (is_array($_POST[$v]) || strlen($_POST[$v]) > 0)) {
-            return true;
+        if(!isset($_POST[$v]) || !(is_array($_POST[$v]) || strlen($_POST[$v]) > 0)) {
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 function debug($v) {
     if (is_array($v)) {
         printArray($v);
     } else {
-        echo $v;
+        echo $v . "<br>\n";
     }
 }
 
 function printArray($data,$n = 0) {
     foreach ($data as $k => $v) {
         if(is_array($v)) {
-            echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$n) . $k . " => {<br>";
+            echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$n) . $k . " => {<br>\n";
             printArray($v,$n+1);
-            echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$n) . "}<br>";
+            echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$n) . "}<br>\n";
         } else {
-            echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$n) . $k . " => " . $v . "<br>";
+            echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$n) . $k . " => " . $v . "<br>\n";
         }
     }
 }
@@ -51,4 +51,22 @@ function writeConfig($res,$data) {
     foreach ($data as $k => $v) {        
         fwrite($res,"$" . $k . " = '" . $v . "';" . PHP_EOL);
     }
+}
+
+function downloadFile($path,$name) {
+    $ext = end(explode(".",$path));
+
+    header("Content-Description: File Transfer");
+    header("Content-Disposition: attachment; filename=" . $name . "." . $ext);
+    ob_clean();
+
+    readfile("../../files/" . $path);
+}
+
+function timeDiff($a,$b) {
+    return strtotime($a) - strtotime($b);
+}
+
+function getCurrentTime() {
+    return date("Y-m-d h:i:s");
 }

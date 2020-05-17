@@ -21,36 +21,40 @@ if (isset($_SESSION["course"]["as"])) {
         <div class="side-bar-icon"><i class="material-icons">menu</i></div>
         <div class="side-bar-text">Menu</div>
     </div>
-    <div class="side-bar-item" redirect="index" target="#page">
+    <div class="side-bar-item" page="index" sub="course_list">
         <div class="side-bar-icon"><i class="material-icons">arrow_back</i></div>
         <div class="side-bar-text">Back</div>
     </div>
     <div class="side-bar-title mt-4"><?=$_SESSION["course"]["data"]["title"]?></div>
-    <div class="side-bar-item" redirect="course_home" target="#content">
+    <div class="side-bar-item" content="course_home">
         <div class="side-bar-icon"><i class="material-icons">home</i></div>
         <div class="side-bar-text">Home</div>
     </div>
-    <div class="side-bar-item" redirect="course_materials" target="#content">
+    <div class="side-bar-item" content="course_material_list">
         <div class="side-bar-icon"><i class="material-icons">folder</i></div>
         <div class="side-bar-text">Materials</div>
     </div>
-    <div class="side-bar-item" redirect="course_assignment_list" target="#content">
+    <div class="side-bar-item" content="course_assignment_list">
         <div class="side-bar-icon"><i class="material-icons">assignment</i></div>
         <div class="side-bar-text">Assigments</div>
     </div>
-    <div class="side-bar-item" redirect="course_grading_list" target="#content">
+    <div class="side-bar-item" content="course_grading_list">
         <div class="side-bar-icon"><i class="material-icons">bar_chart</i></div>
         <div class="side-bar-text">Grades</div>
     </div>
-    <div class="side-bar-item" redirect="course_voting_list" target="#content">
+    <div class="side-bar-item" content="course_voting_list">
         <div class="side-bar-icon"><i class="material-icons">how_to_vote</i></div>
         <div class="side-bar-text">Votes</div>
+    </div>
+    <div class="side-bar-item" content="course_quiz_list">
+        <div class="side-bar-icon"><i class="material-icons">list_alt</i></div>
+        <div class="side-bar-text">Quizes</div>
     </div>
 
     <?php
     if (asTeacher()) {
         ?>
-        <div class="side-bar-item" redirect="course_settings" target="#content">
+        <div class="side-bar-item" content="course_settings">
             <div class="side-bar-icon"><i class="material-icons">settings</i></div>
             <div class="side-bar-text">Settings</div>
         </div>
@@ -65,7 +69,7 @@ if (isset($_SESSION["course"]["as"])) {
 </div>
 <div id="content" class="content">
     <?php
-        include("course_home.php");
+        // include("course_home.php");
     ?>
 </div>
 <?php

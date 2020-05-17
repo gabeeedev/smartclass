@@ -27,7 +27,7 @@ if (asTeacher() && isset($_POST["grading"]) && isset($_POST["grades"])) {
             if ($t["id"] == $grade["user"]) {
 
                 if ($t["grade"] != $grade["grade"] || $t["comment"] != $grade["comment"]) {
-                    $t["gradeid"] = $grade["gradeid"];
+                    $t["gradeId"] = $grade["gradeId"];
                     array_push($updates,$t);
                 }
                 
@@ -38,7 +38,7 @@ if (asTeacher() && isset($_POST["grading"]) && isset($_POST["grades"])) {
 
         foreach($empty as $k => $t) {
             if ($t["id"] == $grade["user"]) {
-                array_push($removes,$grade["gradeid"]);
+                array_push($removes,$grade["gradeId"]);
                 unset($empty[$k]);
                 break;
             }
@@ -53,13 +53,13 @@ if (asTeacher() && isset($_POST["grading"]) && isset($_POST["grades"])) {
     }
     sql_multiple_insert("grades",$cols,$insert);
 
-    sql_multiple_delete_by_id("grades","gradeid",$removes);
+    sql_multiple_delete_by_id("grades","gradeId",$removes);
 
     $insert = [];
     $cols = ["grade","comment"];
     
     foreach($updates as $v) {
-        array_push($insert,[$v["grade"],$v["comment"],$v["gradeid"]]);
+        array_push($insert,[$v["grade"],$v["comment"],$v["gradeId"]]);
     }
-    sql_multiple_update_by_id("grades","gradeid",$cols,$insert);
+    sql_multiple_update_by_id("grades",["gradeId"],$cols,$insert);
 }

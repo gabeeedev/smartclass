@@ -5,61 +5,80 @@ require_once "config.php";
 $con = new PDO("mysql:host=" . $mysqlAddress . ";dbname=" . $mysqlDatabase, $mysqlUsername, $mysqlPassword);
 $con->query("SET NAMES utf8");
 
-function sql_select($sql, $array=array()) {
+function sql_error($query) {
+    $error = $query->errorInfo();
+    if (count($error) > 2 && strlen($error[2]) > 0) {
+        echo "<b>SQL Error</b>: " . $error[2];
+    }
+}
+
+function sql_select($sql, $data=array()) {
     GLOBAL $con;
     
     $query = $con->prepare($sql);
-    $query->execute($array);
+    $success = $query->execute($data);
+    if(!$success) { sql_error($query); return false; }
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function sql_select_unique($sql,$array=array()) {
+function sql_select_unique($sql,$data=array()) {
     GLOBAL $con;
     
     $query = $con->prepare($sql);
-    $query->execute($array);
+    $success = $query->execute($data);
+    if(!$success) { sql_error($query); return false; }
     return $query->fetch(PDO::FETCH_ASSOC);
 }
 
-function sql_select_array($sql, $array=array()) {
+function sql_select_array($sql, $data=array()) {
     GLOBAL $con;
     
     $query = $con->prepare($sql);
-    $query->execute($array);
-    return $query->fetchAll(PDO::FETCH_ARRAY);
+    $success = $query->execute($data);
+    if(!$success) { sql_error($query); return false; }
+    return $query->fetchAll(PDO::FETCH_NUM);
 }
 
-function sql_query($sql, $array=array()) {
+function sql_query($sql, $data=array()) {
     GLOBAL $con;
     
     $query = $con->prepare($sql);
-    $query->execute($array);
+    $success = $query->execute($data);
+    if(!$success) { sql_error($query); return false; }
+    return true;
 }
 
-function sql_insert($table, $array) {
+function sql_insert($table, $data) {
     GLOBAL $con;
 
-    $data = [];
-    foreach ($array as $k => $v) {
-        $data[":" . $k] = $v;
+    $spec = [];
+    foreach ($data as $k => $v) {
+        $spec[":" . $k] = $v;
     }
-    sql_query("INSERT INTO " . $table . " (" . implode(", ",array_keys($array)) . ") VALUES (" . implode(", ",array_keys($data)) . ")", $data);
+    $success = sql_query("INSERT INTO " . $table . " (" . implode(", ",array_keys($data)) . ") VALUES (" . implode(", ",array_keys($spec)) . ")", $spec);
+    if(!$success) { return false; }
     return $con->lastInsertId();
 }
 
-function sql_update_by_id($table,$array,$idcol,$id) {
+function sql_update_by_id($table,$data,$idcol,$id) {
     GLOBAL $con;
 
-    $data = [];
-    foreach ($array as $k => $v) {
-        $data[":" . $k] = $v;
-    }
-    $data[":" . $idcol] = $id;
     $cols = [];
-    foreach ($array as $k => $v) {
+    foreach ($data as $k => $v) {
         $cols[] = $k . " = " . ":" . $k;
     }
-    sql_query("UPDATE " . $table . " SET " . implode(", ",$cols) . " WHERE " . $idcol . " = :" . $idcol,$data);
+
+    $data[$idcol] = $id;
+
+    return sql_query("UPDATE " . $table . " SET " . implode(", ",$cols) . " WHERE " . $idcol . " = :" . $idcol,$data);
+}
+
+function sql_delete($sql,$data = array()) {
+    GLOBAL $con;
+
+    $query = $con->prepare($sql);
+    $query->execute($data);
+    return $query->rowCount();
 }
 
 function sql_multiple_insert($table,$cols,$datas) {
@@ -86,19 +105,24 @@ function sql_multiple_insert($table,$cols,$datas) {
     return $ids;
 }
 
-function sql_multiple_update_by_id($table,$idcol,$cols,$datas) {
+function sql_multiple_update_by_id($table,$idcols,$cols,$datas) {
     GLOBAL $con;
+    
+    $it = [];
 
-    $t = [];
+    foreach($idcols as $v) {
+        array_push($it,$v . " = ?");
+    }
+
+    $dt = [];
 
     foreach($cols as $v) {
-        array_push($t,$v . " = ?");
+        array_push($dt,$v . " = ?");
     }    
 
-    $sql = "UPDATE $table SET " . implode(", ",$t) . " WHERE $idcol = ?";
+    $sql = "UPDATE $table SET " . implode(", ",$dt) . " WHERE " . implode(" AND ", $it);
     $query = $con->prepare($sql);
 
-    
     foreach($datas as $data) {
         $query->execute($data);
     }

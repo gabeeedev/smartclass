@@ -16,7 +16,11 @@ if (checkPostData(["loginUsername", "loginPassword"])) {
 
     if($data !== false) {
         if(checkPassword($password,$data)) {
-            login($data['userid']);
+            login($data['userId']);
+            echo "1";
         }
     }    
+    else {
+        echo "<div class='alert alert-danger' role='alert'>Invalid credentials!</div>";
+    }
 }

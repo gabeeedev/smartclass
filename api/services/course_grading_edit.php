@@ -5,12 +5,31 @@ require_once "../util/util.php";
 
 loginRedirect();
 if (checkPostData(["gradingTitle","gradingDescription","gradingMin","gradingMax"]) && asTeacher()) {
-    sql_insert("gradings",[
+
+    $edit = isset($_POST["gradingEdit"]) ? $_POST["gradingEdit"] : false;
+    if ($edit !== false) {
+        $row = sql_select_unique("SELECT course FROM gradings WHERE gradingId = ?",[$edit]);
+        if ($row === false || !teachesCourse($row["course"])) {
+            $edit = false;
+        }
+    }
+
+    $data = [
         "title" => $_POST["gradingTitle"],
         "description" => $_POST["gradingDescription"],
-        "min" => $_POST["gradingMin"],
-        "max" => $_POST["gradingMax"],
-        "public_scores" => (isset($_POST["gradingPublicScores"]) && $_POST["gradingPublicScores"] == "true") ? 1 : 0,
-        "course" => $_SESSION["course"]["id"]
-    ]);
+        "minPoints" => $_POST["gradingMin"],
+        "maxPoints" => $_POST["gradingMax"],
+        "publicScores" => (isset($_POST["gradingPublicScores"]) && $_POST["gradingPublicScores"] == "true") ? 1 : 0,
+    ];
+
+    if ($edit === false) {
+        $data["course"] = $_SESSION["course"]["id"];
+        $id = sql_insert("gradings",$data);
+    } else {
+        $id = $edit;
+        sql_update_by_id("gradings",$data,"gradingId",$edit);
+    }
+    echo $id;
+} else {
+    echo "0";
 }
