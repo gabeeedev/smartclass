@@ -1,10 +1,6 @@
 <?php 
 
-    // require_once "/api/util/config.php";
     require_once "../util/util.php";
-    
-
-    // if(isset($testMode) && $testMode === true) { 
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +20,6 @@
     <div class="page">
         <div class="w-50 mx-auto mt-4">
             <?php 
-            //include "api/controllers/developer_testing.php";
             require_once "../util/util.php";
     $dir = scandir("./");
 
@@ -37,17 +32,5 @@
         </div>
     </div>
 </body>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/script.js"></script>
 
 </html>
-
-<?php
-    // } else {
-    //     include("index.html");
-    // }
-
-    
-
-?>
