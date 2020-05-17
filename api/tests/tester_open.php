@@ -1,6 +1,7 @@
 <?php 
 
     // require_once "/api/util/config.php";
+    require_once "../util/util.php";
     
 
     // if(isset($testMode) && $testMode === true) { 
