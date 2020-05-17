@@ -1,5 +1,5 @@
 <?php 
-
+    session_start();
     require_once "../util/util.php";
 ?>
 
@@ -20,7 +20,6 @@
     <div class="page">
         <div class="w-50 mx-auto mt-4">
             <?php 
-            require_once "../util/util.php";
     $dir = scandir("./");
 
     foreach($dir as $file) {
