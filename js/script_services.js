@@ -399,7 +399,7 @@ function quizBegin(e) {
     id = $(this).attr("quizId");
 
     $.post("api/services/course_quiz_begin.php",{"quizId":id},function(data) {
-        loadContent("course_quiz_fill",{"id":id});
+        loadContent("course_quiz",{"id":id});
         console.log(data);
     });
 }
