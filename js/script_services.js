@@ -344,6 +344,7 @@ function votingVote(e) {
 
 
     $.post("api/services/course_voting_vote.php", data, function (data) {
+        console.log(data);
         loadContent("course_voting",{ id: $("#votingId").val() });
     });
 }

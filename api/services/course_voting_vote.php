@@ -11,7 +11,7 @@ require_once "../util/course.php";
 require_once "../util/util.php";
 
 loginRedirect();
-if (isset($_POST["voting"]) && isset($_POST["votes"])) {
+if (isset($_POST["voting"]) && isset($_POST["votes"]) && asStudent()) {
     $id = $_POST["voting"];
     $votes = $_POST["votes"];
 
@@ -24,7 +24,7 @@ if (isset($_POST["voting"]) && isset($_POST["votes"])) {
                 array_push($data,[$_SESSION["user"]["userId"],$v["id"]]);
             }
         }
-        sql_multiple_insert("votes",["user","option"],$data);
+        $ret = sql_multiple_insert("votes",["`user`","`option`"],$data);
     }
 
 }

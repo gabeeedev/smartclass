@@ -156,7 +156,7 @@ loginRedirect();
             ?>
             <div class="f-row p-2">
                 <div class="block p-3 rounded d-flex flex-row">
-                    <div class="font-weight-bold clickable flex-max mr-4" page="course" pageOptions="course:<?=$row["course"]?>" sub="course_voting_vote" contentOptions=<?="id:" . $row["votingId"]?>>
+                    <div class="font-weight-bold clickable flex-max mr-4" page="course" pageOptions="course:<?=$row["course"]?>" sub="course_voting" contentOptions=<?="id:" . $row["votingId"]?>>
                         <?=$row["ctitle"] . " - " . $row["title"]?>
                     </div>
                     <span class="mx-4 font-italic"><?=date("Y. M. d. H:i",strtotime($row["availableTo"]))?></span>                   

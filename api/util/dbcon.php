@@ -87,7 +87,7 @@ function sql_multiple_insert($table,$cols,$datas) {
     $valq = "(";
 
     for ($i=0; $i < count($cols)-1; $i++) { 
-        $valq .= "?,";
+        $valq .= "?, ";
     }
 
     $valq .= "?)";
@@ -99,6 +99,7 @@ function sql_multiple_insert($table,$cols,$datas) {
     
     foreach($datas as $data) {
         $query->execute($data);
+        sql_error($query);
         array_push($ids,$con->lastInsertId());
     }
 
