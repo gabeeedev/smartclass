@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Download material file
+ * id - Material file ID
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

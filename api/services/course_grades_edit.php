@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modify grades
+ * grading - Grading ID
+ * grades - Array of grades and 
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

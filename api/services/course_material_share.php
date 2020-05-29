@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Share material with course
+ * materialShare - Material ID
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

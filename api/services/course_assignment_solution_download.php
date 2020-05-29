@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Download assignment solution
+ * id - Solution ID
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

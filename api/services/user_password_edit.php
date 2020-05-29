@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Set new password
+ * settingsOldPassword - Old password
+ * settingsPassword - Password
+ * settingsRepeatPassword Repeat password
+ */
+
 require_once "../util/util.php";
 require_once "../util/auth.php";
 

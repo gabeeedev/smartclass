@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Login
+ * loginUsername - Username/E-mail
+ * loginPassword - Password
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

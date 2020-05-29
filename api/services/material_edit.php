@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * New or modify material
+ * materialTitle - Material title
+ * materialContent - Material content
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

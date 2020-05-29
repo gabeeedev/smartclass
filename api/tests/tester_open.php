@@ -20,13 +20,13 @@
     <div class="page">
         <div class="w-50 mx-auto mt-4">
             <?php 
-    $dir = scandir("./");
+                $dir = scandir("./");
 
-    foreach($dir as $file) {
-        if (strpos($file,"test_") > -1) {
-            require_once $file;
-        }
-    } 
+                foreach($dir as $file) {
+                    if (strpos($file,"test_") > -1) {
+                        require_once $file;
+                    }
+                } 
             ?>
         </div>
     </div>

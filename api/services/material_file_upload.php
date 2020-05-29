@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Upload material file
+ * materialFileTitle - Material file title
+ * materialFile - File
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

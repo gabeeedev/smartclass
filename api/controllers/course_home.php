@@ -27,7 +27,7 @@ loginRedirect();
 
 <?php
 
-    $posts = sql_select("SELECT u.name, p.postDate, p.content, p.postId FROM posts p, users u WHERE p.user = u.userId AND p.course = ? ORDER BY p.postDate DESC",[$_SESSION["course"]["id"]]);
+    $posts = sql_select("SELECT u.name, p.user, p.postDate, p.content, p.postId FROM posts p, users u WHERE p.user = u.userId AND p.course = ? ORDER BY p.postDate DESC",[$_SESSION["course"]["id"]]);
 
     foreach($posts as $row) {
         ?>
@@ -38,6 +38,13 @@ loginRedirect();
                         <b><?=$row["name"]?></b>
                     </div>
                     <div class="d-flex ml-auto">
+                    <?php
+                        if ($row["user"] == $_SESSION["user"]["userId"]) {
+                            ?>                     
+                                <i class="material-icons flex-static mx-1 clickable" delete_popup="<?=substr($row["content"],0,20) . "..."?>" delete_service="course_post_delete" delete_id="<?=$row["postId"]?>">delete</i>
+                            <?php
+                        }
+                    ?>
                         <b><?=$row["postDate"]?></b>
                     </div>
                 </div>

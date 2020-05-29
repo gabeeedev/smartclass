@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Delete quiz
+ * id - Quiz ID
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

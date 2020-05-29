@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Upload assignment solution
+ * assignmentId - Assignment ID
+ * assignmentSolution - Solution (file)
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

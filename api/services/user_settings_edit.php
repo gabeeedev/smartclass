@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Set new password
+ * settingsEmail - Email
+ * settingsName - Name
+ */
+
 require_once "../util/util.php";
 require_once "../util/auth.php";
 

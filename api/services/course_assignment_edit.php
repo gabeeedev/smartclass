@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * New or modofy assignment
+ * assignmentTitle - Assignment title
+ * assignmentContent - Assignment content
+ * assignmentFrom - Assignment available from
+ * assignmentTo - Assignment available till
+ * assignmentExt - Assignment available extensions
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * New comment
+ * commentContent - Comment content
+ * postId - Post ID
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

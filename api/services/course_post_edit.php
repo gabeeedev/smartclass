@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * New post
+ * postContent - Post content
+ */
+
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

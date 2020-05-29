@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Delete quiz bank
+ * id - Quiz bank ID
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

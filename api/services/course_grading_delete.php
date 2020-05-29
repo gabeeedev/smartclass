@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Delete grading
+ * id - Grading ID
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

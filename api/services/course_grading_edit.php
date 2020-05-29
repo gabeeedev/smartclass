@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * New or modify grading
+ * gradingTitle - Grading title
+ * gradingDescription - Grading description
+ * gradingMin - Grading minimum points
+ * gradingMax - Grading maximum points
+ * publicScores - Should the grades be public
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

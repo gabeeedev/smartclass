@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Quiz solution
+ * quizId - Quiz ID
+ * quizAnswers - Quiz answers
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Begin quiz
+ * quizId - Quiz ID
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

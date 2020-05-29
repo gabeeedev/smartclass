@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Join course
+ * courseToken - Token of course
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

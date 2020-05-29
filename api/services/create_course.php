@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Bew course
+ * courseName - Name of the course
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 

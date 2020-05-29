@@ -3,6 +3,7 @@
 require_once "../util/course.php";
 require_once "../util/util.php";
 
+//Auth check
 loginRedirect();
 
 $list = sql_select("SELECT * FROM assignments WHERE course = ? AND availableFrom < CURRENT_TIMESTAMP AND availableTo > CURRENT_TIMESTAMP ORDER BY availableTo, assignmentId DESC",[$_SESSION["course"]["id"]]);

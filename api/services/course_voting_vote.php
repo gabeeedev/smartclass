@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Voting votes
+ * voting - Voting ID
+ * votes - Selected voting options
+ */
+
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

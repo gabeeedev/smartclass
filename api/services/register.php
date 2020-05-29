@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Login
+ * registerUsername - Username
+ * registerEmail - E-mail
+ * registerName - Name
+ * registerPassword - Password
+ * registerRepeatPassword - Repeat password
+ */
+
 require_once "../util/util.php";
 require_once "../util/auth.php";
 

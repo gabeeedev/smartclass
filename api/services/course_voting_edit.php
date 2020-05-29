@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * New voting
+ * votingTitle - Voting title
+ * votingDescription - Voting description
+ * votingFrom - Voting available from
+ * votingTo - Voting available till
+ * votingAnswers - Available answers for voting
+ */
+
 require_once "../util/course.php";
 require_once "../util/util.php";
 

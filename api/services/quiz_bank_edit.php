@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * New question bank
+ * bankTitle - Bank title
+ * bankQuestions - Array of questions
+ */
+
 require_once "../util/auth.php";
 require_once "../util/util.php";
 
