@@ -83,4 +83,4 @@ function editorButtonHandler() {
     $(".geditor").focus();
 
 }
-handler("click","btn-editor",editorButtonHandler);
+handler("click",".btn-editor",editorButtonHandler);
